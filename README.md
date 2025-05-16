@@ -17,5 +17,6 @@ Tarkempi selostus toiminallisuudesta:
 - Käyttäjä voi ilmoittautua askareen tekijäksi
 - Käyttäjä voi merkitä suoritetun askareen tehdyksi
 - Käyttäjä voi luoda oman askareen
+- Käyttäjä voi poistaa tai muokata askaretta ennen kuin siihen on ilmoittautunut tekijä
 - Käyttäjä voi varmistaa oman askareen tehdyksi
 
