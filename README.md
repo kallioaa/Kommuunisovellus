@@ -1,4 +1,4 @@
-# Kommuunisovellues
+# Kommuunisovellus
 
 Sovelluksen tarkoituksena on luoda leikkimielinen pistesysteemi kanssa-asujien kanssa käytettäväksi. Jokaisella käyttäjällä on oma pistepankki. Pisteitä voi saada kahdella eri tavalla.
 
