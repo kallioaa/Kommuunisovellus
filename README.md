@@ -25,6 +25,7 @@ Tarkempi selostus toiminallisuudesta:
 - Huomasin bugin, jossa eventin lisäys ei aina onnistun ensimmäisellä kerralla klikkauksella, se tulee korjata
 - Virheiden parempaa selvittämistä tulevaisuudessa
 - Events listaukset epäselviä äänestyksessä ja muutenkin. Tämän kehittäminen sekä hakutoiminto.
+- Sovellus aiemmin kehitetty englanniksi, jos kieli tulee muuttaa, sen tekeminen
 
 # Commune App
 
