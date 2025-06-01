@@ -20,3 +20,9 @@ Tarkempi selostus toiminallisuudesta:
 - Käyttäjä voi poistaa tai muokata askaretta ennen kuin siihen on ilmoittautunut tekijä
 - Käyttäjä voi varmistaa oman askareen tehdyksi
 
+# Tilanne välipalautus 2
+- Suurin osa toiminnallisuudesta toteutettu
+- Huomasin bugin, jossa eventin lisäys ei aina onnistun ensimmäisellä kerralla klikkauksella, se tulee korjata
+- Virheiden parempaa selvittämistä tulevaisuudessa
+- Events listaukset epäselviä äänestyksessä ja muutenkin. Tämän kehittäminen sekä hakutoiminto.
+
