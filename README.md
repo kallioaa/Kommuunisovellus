@@ -1,4 +1,4 @@
-# Kommuunisovellus
+## Kommuunisovellus
 
 Sovelluksen tarkoituksena on luoda leikkimielinen pistesysteemi kanssa-asujien kanssa käytettäväksi. Jokaisella käyttäjällä on oma pistepankki. Pisteitä voi saada kahdella eri tavalla.
 
@@ -20,7 +20,7 @@ Tarkempi selostus toiminallisuudesta:
 - Käyttäjä voi poistaa tai muokata askaretta ennen kuin siihen on ilmoittautunut tekijä
 - Käyttäjä voi varmistaa oman askareen tehdyksi
 
-# Tilanne välipalautus 2
+## Tilanne välipalautus 2
 - Suurin osa toiminnallisuudesta toteutettu
 - Huomasin bugin, jossa eventin lisäys ei aina onnistun ensimmäisellä kerralla klikkauksella, se tulee korjata
 - Virheiden parempaa selvittämistä tulevaisuudessa
