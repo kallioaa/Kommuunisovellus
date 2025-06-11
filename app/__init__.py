@@ -15,10 +15,6 @@ app.secret_key = getenv("SECRET_KEY")
 # Initialize Flask-Bootstrap
 Bootstrap(app)
 
-@app.errorhandler(404)
-def not_found(error):
-    return render_template("404.html"), 404
-
 # Blueprint imports
 from app.mod_users.controllers import mod_users  # noqa: E402
 from app.mod_main.controllers import mod_main  # noqa: E402
@@ -31,4 +27,4 @@ app.register_blueprint(mod_users)
 app.register_blueprint(mod_main)
 app.register_blueprint(mod_events)
 app.register_blueprint(mod_todos)
-app.register_blueprint(mod_voting)  # Uncomment when voting module is ready
+app.register_blueprint(mod_voting)
