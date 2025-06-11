@@ -1,39 +1,31 @@
 """
 Models for handling event-related database operations in the mod_events module.
 """
-
-from sqlalchemy import text
-from sqlalchemy.exc import SQLAlchemyError
-from app import db
+import app.db as db 
 
 # Function to add an event to the database
 def add_event_to_database(event_data):
     try:
         sql = """
             INSERT INTO events (user_id, applied_for_id, event, description, event_score, event_date)
-            VALUES (:user_id, :applied_for_id, :event, :description, :event_score, :event_date)
-            RETURNING id
+            VALUES (?, ?, ?, ?, ?, ?)
         """
-
-        result = db.session.execute(
-            text(sql),
-            {
-                "user_id": event_data["user_id"],
-                "applied_for_id": event_data["applied_for_id"],
-                "event": event_data["event"],
-                "description": event_data["description"],
-                "event_score": event_data["event_score"],
-                "event_date": event_data["event_date"],
-            },
+        db.execute(
+            sql,
+            [
+                event_data["user_id"],
+                event_data["applied_for_id"],
+                event_data["event"],
+                event_data["description"],
+                event_data["event_score"],
+                event_data["event_date"],
+            ],
         )
 
-        db.session.commit()
-
-        new_event_id = result.fetchone()[0]
+        new_event_id = db.last_insert_id()
         return new_event_id
 
-    except SQLAlchemyError as e:
-        db.session.rollback()
+    except Exception as e:
         print(f"Error inserting event: {e}")
         return None
 
@@ -56,10 +48,8 @@ def get_all_passed_events():
       AND e.passed = TRUE
     """
 
-    result = db.session.execute(text(sql))
-    rows = result.fetchall()
-
-    events = [row._mapping for row in rows]
+    rows = db.query(sql)
+    events = [dict(row) for row in rows]  # Convert sqlite3.Row to dict
     return events
 
 # delete event
@@ -67,13 +57,11 @@ def delete_event(event_id):
     try:
         sql = """
             DELETE FROM events
-            WHERE id = :event_id
+            WHERE id = ?
         """
-        db.session.execute(text(sql), {"event_id": event_id})
-        db.session.commit()
+        db.execute(sql, [event_id])
         return True
 
-    except SQLAlchemyError as e:
-        db.session.rollback()
+    except Exception as e:
         print(f"Error deleting event: {e}")
         return False

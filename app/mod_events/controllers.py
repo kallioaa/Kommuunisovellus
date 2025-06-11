@@ -29,7 +29,7 @@ def new_event():
 
     # Populate the dropdown with usernames and emails
     result = get_usernames_and_emails()
-    choices = [(row.username, f"{row.username} ({row.email})") for row in result]
+    choices = [(row["username"], f"{row['username']} ({row['email']})") for row in result]
     form.applying_event_for.choices = choices
 
     if form.validate_on_submit():
@@ -61,7 +61,7 @@ def new_event():
                 return render_template("events/new_event.html", form=form)
             
             flash("Event created and vote added successfully!", "success")
-            return redirect(url_for("events.main"))  # Redirect to the main page
+            return redirect(url_for("events.main"))
 
         flash("Failed to create event.", "danger")
         return render_template("events/new_event.html", form=form)

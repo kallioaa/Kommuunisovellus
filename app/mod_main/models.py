@@ -1,9 +1,6 @@
-from sqlalchemy import text
-from sqlalchemy.exc import SQLAlchemyError
-from app import db
+import app.db as db
 
-
-# get scores from the databases for all the users
+# Get scores from the databases for all the users
 def get_commune_credit_scores_summary():
     sql = """
     SELECT
@@ -16,11 +13,11 @@ def get_commune_credit_scores_summary():
     ORDER BY total_score DESC;
     """
     try:
-        result = db.session.execute(text(sql))
-        rows = result.fetchall()
-        # Convert each row (SQLAlchemy Row object) into a dict
-        scores = [row._mapping for row in rows]
+        rows = db.query(sql)
+        # Convert each row to a dict
+        scores = [dict(row) for row in rows]
         return scores
-    except SQLAlchemyError as e:
+    except Exception as e:
         print(f"Error retrieving credit scores summary: {e}")
         raise e
+

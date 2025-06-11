@@ -9,19 +9,9 @@ from app.mod_users.models import add_user_to_database, get_user_id
 
 mod_users = Blueprint("users", __name__, url_prefix="/users")
 
-
+# Handle user login.
 @mod_users.route("/", methods=["GET", "POST"])
 def log_in():
-    """
-    Handle user login.
-
-    - Displays the login form.
-    - Authenticates the user and sets session variables if login is successful.
-
-    Returns:
-        - Redirects to the main page on successful login.
-        - Renders the login page if validation fails.
-    """
     form = LoginForm()
     if form.validate_on_submit():
         username = form["username"].data
@@ -31,19 +21,9 @@ def log_in():
         return redirect(url_for("main.main"))
     return render_template("users/log_in.html", form=form)
 
-
+# Handle new user registration.
 @mod_users.route("/new_user", methods=["GET", "POST"])
 def new_user():
-    """
-    Handle new user registration.
-
-    - Displays the registration form.
-    - Hashes the password and adds the user to the database if the form is valid.
-
-    Returns:
-        - Redirects to the login page on successful registration.
-        - Renders the registration page if validation fails.
-    """
     form = CreateUserForm()
     if form.validate_on_submit():
         print("testis")
@@ -55,17 +35,8 @@ def new_user():
         return redirect(url_for("users.log_in"))
     return render_template("users/new_user.html", form=form)
 
-
+# Handle user logout.
 @mod_users.route("log_out", methods=["GET", "POST"])
 def log_out():
-    """
-    Handle user logout.
-
-    - Removes session variables associated with the user.
-    - Redirects to the login page.
-
-    Returns:
-        Redirect to the login page.
-    """
     session.pop("user_id", None)
     return redirect(url_for("users.log_in"))
