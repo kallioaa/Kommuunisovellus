@@ -38,5 +38,6 @@ def new_user():
 # Handle user logout.
 @mod_users.route("log_out", methods=["GET", "POST"])
 def log_out():
-    session.pop("user_id", None)
+    del session["user_id"]
+    del session["username"]
     return redirect(url_for("users.log_in"))
