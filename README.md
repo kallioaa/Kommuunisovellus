@@ -83,11 +83,6 @@ The Commune App is all about creating a communal environment where members can p
    ```bash
    flask run
    ```
-   
-6. **Reseting the database**:
-   ```bash
-   sqlite3 database.db < db_drop_everything.sql
-   ```
 
 ---
 
