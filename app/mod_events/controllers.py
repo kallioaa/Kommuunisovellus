@@ -28,8 +28,6 @@ def new_event():
     result = get_usernames_and_emails()
     choices = [(row["username"], f"{row['username']} ({row['email']})") for row in result]
 
-    
-
     if request.method == "GET":
         return render_template("events/new_event.html", applying_event_choices=choices)
     
