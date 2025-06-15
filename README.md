@@ -52,9 +52,9 @@ The Commune App is all about creating a communal environment where members can p
 
 # Setup Instructions (English)
 
-1. **Clone this repository** to your local machine and navigate to its root directory.
+1. **Clone this repository** to your local machine and navigate to its root directory.**
 
-2. **Activate a virtual environment** and install the dependencies:
+2. **Activate a virtual environment** and install the dependencies**:
    ```bash
    python3 -m venv venv
    source venv/bin/activate
@@ -66,7 +66,7 @@ The Commune App is all about creating a communal environment where members can p
    sqlite3 database_name.db < db_schema.sql
    ```
    
-4. **Add example entreis **:
+4. **Add example entries**:
    ```bash
    sqlite3 database_name.db <db_example_entries.sql
    ```
@@ -76,7 +76,7 @@ The Commune App is all about creating a communal environment where members can p
    flask run
    ```
    
-6. **Reseting the database **:
+6. **Reseting the database**:
    ```bash
    sqlite3 database_name.db < db_drop_everything.sql
    ```
