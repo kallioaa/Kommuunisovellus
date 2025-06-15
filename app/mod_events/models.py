@@ -31,26 +31,31 @@ def add_event_to_database(event_data):
 
 # Function to retrieve all passed events
 def get_all_passed_events():
-    sql = """
-    SELECT 
-        e.id AS event_id,
-        e.user_id AS user_id,
-        u.username AS username, 
-        a.username AS applied_for_username, 
-        e.event, 
-        e.description, 
-        e.event_score, 
-        e.event_date
-    FROM events e
-    JOIN users u ON e.user_id = u.id
-    LEFT JOIN users a ON e.applied_for_id = a.id
-    WHERE e.voting_ended = TRUE 
-      AND e.passed = TRUE
-    """
+    try:
+        sql = """
+        SELECT 
+            e.id AS event_id,
+            e.user_id AS user_id,
+            u.username AS username, 
+            a.username AS applied_for_username, 
+            e.event, 
+            e.description, 
+            e.event_score, 
+            e.event_date
+        FROM events e
+        JOIN users u ON e.user_id = u.id
+        LEFT JOIN users a ON e.applied_for_id = a.id
+        WHERE e.voting_ended = TRUE 
+            AND e.passed = TRUE
+        """
 
-    rows = db.query(sql)
-    events = [dict(row) for row in rows]  # Convert sqlite3.Row to dict
-    return events
+        rows = db.query(sql)
+        events = [dict(row) for row in rows]  # Convert sqlite3.Row to dict
+        return events
+
+    except Exception as e:
+        print(f"Error retrieving passed events: {e}")
+        return []
 
 # delete event
 def delete_event(event_id):
@@ -64,4 +69,4 @@ def delete_event(event_id):
 
     except Exception as e:
         print(f"Error deleting event: {e}")
-        return False
+        return None

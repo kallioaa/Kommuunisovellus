@@ -2,29 +2,33 @@ import app.db as db # Assuming db.py is in the same directory
 
 # Function to retrieve all todos from the database
 def get_all_todos():
-    sql = """
-    SELECT 
-        t.id AS todo_id,
-        t.user_id AS user_id,
-        a.id AS assigned_to_id,
-        u.username AS username,
-        a.username AS assigned_to_username,
-        t.todo, 
-        t.description, 
-        t.todo_score, 
-        t.due_date,
-        t.completed,
-        t.verified
-    FROM todos t
-        JOIN users u ON t.user_id = u.id
-    LEFT JOIN users a ON t.assigned_to_id = a.id
-    ORDER BY t.due_date DESC
-    """
-    rows = db.query(sql)
+    try:
+        sql = """
+        SELECT 
+            t.id AS todo_id,
+            t.user_id AS user_id,
+            a.id AS assigned_to_id,
+            u.username AS username,
+            a.username AS assigned_to_username,
+            t.todo, 
+            t.description, 
+            t.todo_score, 
+            t.due_date,
+            t.completed,
+            t.verified
+        FROM todos t
+            JOIN users u ON t.user_id = u.id
+        LEFT JOIN users a ON t.assigned_to_id = a.id
+        ORDER BY t.due_date DESC
+        """
+        rows = db.query(sql)
 
-    # Convert each row to a dict
-    todos = [dict(row) for row in rows]
-    return todos
+        # Convert each row to a dict
+        todos = [dict(row) for row in rows]
+        return todos
+    except Exception as e:
+        print(f"Error retrieving todos: {e}")
+        return None
 
 # Insert a new todo into the database and return its primary key.
 def add_todo_to_database(user_id, todo, description, todo_score, due_date):

@@ -19,5 +19,5 @@ def get_commune_credit_scores_summary():
         return scores
     except Exception as e:
         print(f"Error retrieving credit scores summary: {e}")
-        raise e
+        return []
 
