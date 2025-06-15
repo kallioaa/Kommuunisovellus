@@ -3,7 +3,6 @@ Controllers for the events module, handling routes for creating and managing eve
 """
 
 from flask import render_template, Blueprint, session, redirect, url_for, flash, request
-from app.mod_events.forms import CreateEventForm
 from app.mod_events.models import add_event_to_database, get_all_passed_events
 from app.mod_users.models import get_usernames_and_emails, get_user_id
 from app.mod_voting.models import add_vote

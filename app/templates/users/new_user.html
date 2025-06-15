@@ -1,57 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
+{% block title %}Create New User{% endblock %}
 
-<head>
-    <title>Create New User</title>
-</head>
+{% block content %}
 
-<body>
-    <h2>Create New User</h2>
+{% include 'components/_navbar.html' %}
+{% include 'components/_alerts.html' %}
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-    <ul>
-        {% for category, message in messages %}
-        <li style="color: red;">{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
+<h2>Create New User</h2>
 
-    <form method="POST" action="{{ url_for('users.new_user') }}">
-        <div>
-            <label for="username">Username:</label><br>
-            <input type="text" id="username" name="username" required placeholder="Enter your username">
-        </div>
+<form method="POST" action="{{ url_for('users.new_user') }}">
+    <div>
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" required placeholder="Enter your username">
+    </div>
 
-        <br>
+    <div>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required placeholder="Enter your email">
+    </div>
 
-        <div>
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email" required placeholder="Enter your email">
-        </div>
+    <div>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required minlength="6" maxlength="50"
+            placeholder="Enter password">
+    </div>
 
-        <br>
-
-        <div>
-            <label for="password">Password:</label><br>
-            <input type="password" id="password" name="password" required minlength="6" maxlength="50"
-                placeholder="Enter password">
-        </div>
-
-        <br>
-
-        <div>
-            <label for="password_repeat">Repeat Password:</label><br>
-            <input type="password" id="password_repeat" name="password_repeat" required placeholder="Repeat password">
-        </div>
-
-        <br>
-
-        <div>
-            <button type="submit">Create new user</button>
-        </div>
-    </form>
-</body>
-
-</html>
+    <div>
+        <label for="password_repeat">Repeat Password:</label><br>
+        <input type="password" id="password_repeat" name="passw_
