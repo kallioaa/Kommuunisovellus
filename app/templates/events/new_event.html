@@ -1,20 +1,67 @@
-{% extends "bootstrap/base.html" %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% import "bootstrap/wtf.html" as wtf %}
-{% block title %} New Event {% endblock %}
-{% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <div class="card">
-                <h4 class="card-title mb-4 mt-1">Create a new Event</h4>
-                {{ wtf.quick_form(form) }}
-                <div>
-                    <br />
-                    <a href="{{ url_for('events.main') }}" class="text-info">Go back</a>
-                </div>
-            </div> <!-- card.// -->
+<head>
+    <title>Create Event</title>
+</head>
+
+<body>
+    <h2>Create New Event</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <ul>
+        {% for category, message in messages %}
+        <li style="color: red;">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('events.new_event') }}">
+        <div>
+            <label for="applying_event_for">Applying Event For:</label><br>
+            <select id="applying_event_for" name="applying_event_for" required>
+                {% for value, label in applying_event_choices %}
+                <option value="{{ value }}">{{ label }}</option>
+                {% endfor %}
+            </select>
         </div>
-    </div>
-</div>
-{% endblock %}
+
+        <br>
+
+        <div>
+            <label for="event">Event Title:</label><br>
+            <input type="text" id="event" name="event" required placeholder="Enter event title">
+        </div>
+
+        <br>
+
+        <div>
+            <label for="description">Description:</label><br>
+            <input type="text" id="description" name="description" placeholder="Optional description">
+        </div>
+
+        <br>
+
+        <div>
+            <label for="event_score">Event Score:</label><br>
+            <input type="number" id="event_score" name="event_score" required placeholder="Enter score">
+        </div>
+
+        <br>
+
+        <div>
+            <label for="event_date">Event Date:</label><br>
+            <input type="date" id="event_date" name="event_date" required>
+        </div>
+
+        <br>
+
+        <div>
+            <button type="submit">Create Event</button>
+        </div>
+    </form>
+</body>
+
+</html>

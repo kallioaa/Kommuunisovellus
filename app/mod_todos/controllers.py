@@ -12,7 +12,6 @@ from flask import (
     url_for,
 )
 from sqlalchemy.exc import SQLAlchemyError
-from app.mod_todos.forms import CreateTodoForm
 from app.mod_todos.models import (
     add_todo_to_database,
     get_all_todos,
@@ -38,26 +37,33 @@ def main_todos():
 def new_todo():
     if "user_id" not in session:
         return redirect(url_for("users.log_in"))
-    form = CreateTodoForm()
-    if form.validate_on_submit():
+    if request.method == "GET":
+        return render_template("todos/new_todo.html")
+    
+    if request.method == "POST":
+        form = request.form
         user_id = session.get("user_id")
-        todo = form["todo"].data
-        description = form["description"].data
-        todo_score = form["todo_score"].data
-        due_date = form["due_date"].data
-        todo_id = add_todo_to_database(
+        todo = form["todo"]
+        description = form["description"]
+        todo_score = form["todo_score"]
+        due_date = form["due_date"]
+        if not todo or not description or not todo_score or not due_date:
+            flash("Some required fields are not filled.", "danger")
+            return render_template("todos/new_todo.html")
+        
+        if add_todo_to_database(
             user_id=user_id,
             todo=todo,
             description=description,
             todo_score=todo_score,
             due_date=due_date,
-        )
-        if todo_id:
+        ):
             flash("Todo created successfully!", "success")
             return redirect(url_for("todos.main_todos"))
-        flash("Failed to create todo. Please check your input.", "danger")
-        return render_template("todos/new_todo.html", form=form)
-    return render_template("todos/new_todo.html", form=form)
+        else:
+            flash("Problem when creating a new todo.", "danger")
+            return render_template("todos/new_todo.html")
+        
 
 # Assign the current user to a todo.
 @mod_todos.route("/assign_for_todo", methods=["GET", "POST"])
