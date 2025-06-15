@@ -3,7 +3,7 @@ Controllers for the users module, handling routes for user authentication and ma
 """
 
 from flask import render_template, redirect, Blueprint, url_for, session, request, flash
-from passlib.hash import pbkdf2_sha256
+from werkzeug.security import generate_password_hash
 import secrets
 from app.mod_users.models import add_user_to_database, get_user_id
 from app.mod_users.models import check_login_authorized, username_exists, email_exists
@@ -25,7 +25,7 @@ def log_in():
         if not username or not password:
             flash("Username and password are required.", "danger")
             return render_template("users/log_in.html")
-        
+    
         if not check_login_authorized(username, password):
             flash("Invalid username or password.", "danger")
             return render_template("users/log_in.html")
@@ -72,7 +72,7 @@ def new_user():
             return render_template("users/new_user.html")
         
         # Hash the password
-        password_hashed = pbkdf2_sha256.hash(password)
+        password_hashed = generate_password_hash(password)
 
         # Add the user to the database
         if add_user_to_database(username, password_hashed, email):

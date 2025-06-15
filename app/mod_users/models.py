@@ -1,4 +1,4 @@
-from passlib.hash import pbkdf2_sha256
+from werkzeug.security import check_password_hash
 import app.db as db
 
 # Check if a username exists in the database.
@@ -38,7 +38,7 @@ def check_login_authorized(username, password):
         if not result:
             return False
         password_hashed_from_db = result[0][0]
-        correct = pbkdf2_sha256.verify(password, password_hashed_from_db)
+        correct = check_password_hash(password_hashed_from_db, password)
         return correct
     except Exception as e:
         print(f"Error checking login authorization: {e}")
