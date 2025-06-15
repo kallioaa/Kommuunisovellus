@@ -63,12 +63,12 @@ The Commune App is all about creating a communal environment where members can p
 
 3. **Set up the database schema**:
    ```bash
-   sqlite3 database_name.db < db_schema.sql
+   sqlite3 database.db < db_schema.sql
    ```
    
 4. **Add example entries**:
    ```bash
-   sqlite3 database_name.db <db_example_entries.sql
+   sqlite3 database.db <db_example_entries.sql
    ```
 
 5. **Run the application**:
@@ -78,7 +78,7 @@ The Commune App is all about creating a communal environment where members can p
    
 6. **Reseting the database**:
    ```bash
-   sqlite3 database_name.db < db_drop_everything.sql
+   sqlite3 database.db < db_drop_everything.sql
    ```
 
 ---
