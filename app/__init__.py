@@ -3,17 +3,13 @@ This module initializes the Flask application, sets configurations,
 registers blueprints, and handles errors for the application.
 """
 from os import getenv
-from flask import Flask, render_template
-from flask_bootstrap import Bootstrap
+from flask import Flask
 
 # Initialize the Flask application
 app = Flask(__name__)
 
 # initialize the app configuration
 app.secret_key = getenv("SECRET_KEY")
-
-# Initialize Flask-Bootstrap
-Bootstrap(app)
 
 # Blueprint imports
 from app.mod_users.controllers import mod_users  # noqa: E402
