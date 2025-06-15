@@ -65,6 +65,7 @@ The Commune App is all about creating a communal environment where members can p
    ```bash
    sqlite3 database_name.db < db_schema.sql
    ```
+   
 4. **Add example entreis **:
    ```bash
    sqlite3 database_name.db <db_example_entries.sql
@@ -74,7 +75,8 @@ The Commune App is all about creating a communal environment where members can p
    ```bash
    flask run
    ```
-5. **Reseting the database **:
+   
+6. **Reseting the database **:
    ```bash
    sqlite3 database_name.db < db_drop_everything.sql
    ```
