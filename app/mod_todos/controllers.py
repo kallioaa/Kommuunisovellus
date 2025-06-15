@@ -36,11 +36,18 @@ def main_todos():
 def new_todo():
     if "user_id" not in session:
         return redirect(url_for("users.log_in"))
+    
     if request.method == "GET":
         return render_template("todos/new_todo.html")
     
     if request.method == "POST":
+        # check csrf token
         form = request.form
+        if form["csrf_token"] != session["csrf_token"]:
+            flash("Invalid CSRF token.", "danger")
+            return redirect(url_for("users.log_in"))
+        
+        # Get form data and validate
         user_id = session.get("user_id")
         todo = form["todo"]
         description = form["description"]

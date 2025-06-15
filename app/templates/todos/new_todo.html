@@ -29,7 +29,9 @@
         <label for="due_date">Due Date:</label><br>
         <input type="date" id="due_date" name="due_date" required>
     </div>
-
+    <div>
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    <div>
     <div>
         <button type="submit">Create Todo</button>
     </div>

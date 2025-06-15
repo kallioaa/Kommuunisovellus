@@ -4,6 +4,7 @@ Controllers for the users module, handling routes for user authentication and ma
 
 from flask import render_template, redirect, Blueprint, url_for, session, request, flash
 from passlib.hash import pbkdf2_sha256
+import secrets
 from app.mod_users.models import add_user_to_database, get_user_id
 from app.mod_users.models import check_login_authorized, username_exists, email_exists
 
@@ -31,6 +32,7 @@ def log_in():
 
         # If login is successful, set session variables
         user_id = get_user_id(username)
+        session["csrf_token"] = secrets.token_hex(16)  # Generate a CSRF token
         session["user_id"] = user_id
         session["username"] = username
         return redirect(url_for("main.main"))

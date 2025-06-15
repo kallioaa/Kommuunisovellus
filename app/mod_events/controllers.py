@@ -28,11 +28,19 @@ def new_event():
     result = get_usernames_and_emails()
     choices = [(row["username"], f"{row['username']} ({row['email']})") for row in result]
 
+    
+
     if request.method == "GET":
         return render_template("events/new_event.html", applying_event_choices=choices)
     
     if request.method == "POST":
+        # check csrf token
         form = request.form
+        if form["csrf_token"] != session["csrf_token"]:
+            flash("Invalid CSRF token.", "danger")
+            return redirect(url_for("users.log_in"))
+
+        # Get form data and validate
         user_id = session.get("user_id")
         applying_for_username = form["applying_event_for"]
         applying_for_id = get_user_id(applying_for_username)

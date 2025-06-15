@@ -29,7 +29,9 @@
         <label for="password_repeat">Repeat Password:</label><br>
         <input type="password" id="password_repeat" name="password_repeat" required placeholder="Repeat password">
     </div>
-
+    <div>
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    <div>
     <div>
         <button type="submit">Create New User</button>
     </div>

@@ -38,7 +38,8 @@
         <label for="event_date">Event Date:</label><br>
         <input type="date" id="event_date" name="event_date" required>
     </div>
-
+    <div>
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     <div>
         <button type="submit">Create Event</button>
     </div>
