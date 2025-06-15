@@ -56,7 +56,9 @@ The Commune App is all about creating a communal environment where members can p
 
 2. **Activate a virtual environment** and install the dependencies**:
    ```bash
-   pip flask
+   python3 -m venv venv
+   source venv/bin/activate
+   pip install flask
    ```
 
 3. **Set up the database schema**:
