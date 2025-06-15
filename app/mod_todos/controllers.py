@@ -11,7 +11,6 @@ from flask import (
     session,
     url_for,
 )
-from sqlalchemy.exc import SQLAlchemyError
 from app.mod_todos.models import (
     add_todo_to_database,
     get_all_todos,
@@ -78,7 +77,7 @@ def assign_for_todo():
         assign_todo_to_user(todo_id, user_id)
         flash("Todo assigned successfully!", "success")
         return redirect(url_for("todos.main_todos"))
-    except SQLAlchemyError as e:
+    except Exception as e:
         flash(f"Failed to assign todo: {str(e)}", "danger")
         return redirect(url_for("todos.main_todos"))
 
@@ -95,7 +94,7 @@ def complete_todo():
     try:
         complete_todo_in_database(todo_id)
         return redirect(url_for("todos.main_todos"))
-    except SQLAlchemyError as e:
+    except Exception as e:
         flash(f"Failed to complete todo: {str(e)}", "danger")
         return redirect(url_for("todos.main_todos"))
 
@@ -114,7 +113,7 @@ def verify_todo():
         verify_todo_in_database(todo_id)
         flash("Todo verified successfully!", "success")
         return redirect(url_for("todos.main_todos"))
-    except SQLAlchemyError as e:
+    except Exception as e:
         flash(f"Failed to verify todo: {str(e)}", "danger")
         return redirect(url_for("todos.main_todos"))
 
@@ -132,6 +131,6 @@ def delete_todo():
         drop_todo_from_database(todo_id)
         flash("Todo deleted successfully!", "success")
         return redirect(url_for("todos.main_todos"))
-    except SQLAlchemyError as e:
+    except Exception as e:
         flash(f"Failed to delete todo: {str(e)}", "danger")
         return redirect(url_for("todos.main_todos"))
