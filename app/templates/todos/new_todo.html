@@ -1,57 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
+{% block title %}Create Todo{% endblock %}
 
-<head>
-    <title>Create Todo</title>
-</head>
+{% block content %}
 
-<body>
-    <h2>Create New Todo</h2>
+{% include 'components/_navbar.html' %}
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-    <ul>
-        {% for category, message in messages %}
-        <li style="color: red;">{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
+<h2>Create New Todo</h2>
 
-    <form method="POST" action="{{ url_for('todos.new_todo') }}">
-        <div>
-            <label for="todo">Todo Title:</label><br>
-            <input type="text" id="todo" name="todo" required placeholder="Enter todo title">
-        </div>
+{% include 'components/_alerts.html' %}
 
-        <br>
+<form method="POST" action="{{ url_for('todos.new_todo') }}">
+    <div>
+        <label for="todo">Todo Title:</label><br>
+        <input type="text" id="todo" name="todo" required placeholder="Enter todo title">
+    </div>
 
-        <div>
-            <label for="description">Description:</label><br>
-            <textarea id="description" name="description" placeholder="Enter description (optional)" rows="4"
-                cols="50"></textarea>
-        </div>
+    <div>
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description" placeholder="Enter description (optional)" rows="4"
+            cols="50"></textarea>
+    </div>
 
-        <br>
+    <div>
+        <label for="todo_score">Todo Score:</label><br>
+        <input type="number" id="todo_score" name="todo_score" required placeholder="Enter score">
+    </div>
 
-        <div>
-            <label for="todo_score">Todo Score:</label><br>
-            <input type="number" id="todo_score" name="todo_score" required placeholder="Enter score">
-        </div>
+    <div>
+        <label for="due_date">Due Date:</label><br>
+        <input type="date" id="due_date" name="due_date" required>
+    </div>
 
-        <br>
+    <div>
+        <button type="submit">Create Todo</button>
+    </div>
+</form>
 
-        <div>
-            <label for="due_date">Due Date:</label><br>
-            <input type="date" id="due_date" name="due_date" required>
-        </div>
-
-        <br>
-
-        <div>
-            <button type="submit">Create Todo</button>
-        </div>
-    </form>
-</body>
-
-</html>
+{% endblock %}

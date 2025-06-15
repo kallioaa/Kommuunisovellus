@@ -3,9 +3,10 @@
 {% block content %}
 
 {% include 'components/_navbar.html' %}
-{% include 'components/_alerts.html' %}
 
 <h2>Create New User</h2>
+
+{% include 'components/_alerts.html' %}
 
 <form method="POST" action="{{ url_for('users.new_user') }}">
     <div>
@@ -26,4 +27,12 @@
 
     <div>
         <label for="password_repeat">Repeat Password:</label><br>
-        <input type="password" id="password_repeat" name="passw_
+        <input type="password" id="password_repeat" name="password_repeat" required placeholder="Repeat password">
+    </div>
+
+    <div>
+        <button type="submit">Create New User</button>
+    </div>
+</form>
+
+{% endblock %}
