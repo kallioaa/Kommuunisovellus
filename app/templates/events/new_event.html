@@ -7,11 +7,9 @@
 {% block content %}
 
 {% include 'components/_navbar.html' %}
+{% include 'components/_alerts.html' %}
 
 <h2>Create New Event</h2>
-
-<!-- Optional: Flash message rendering -->
-{% include 'components/_alerts.html' %}
 
 <form method="POST" action="{{ url_for('events.new_event') }}">
     <div>

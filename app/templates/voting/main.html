@@ -4,21 +4,16 @@
 
 
 {% block content %}
-<!-- Navbar Code -->
 {% include 'components/_navbar.html' %}
+{% include 'components/_alerts.html' %}
 
-<!-- Introductory Text Section -->
 <div>
-    <div>
-        <div>
-            <div class="alert" role="alert">
-                Welcome to the Voting section! Participate in voting or check ongoing and applied events.
-            </div>
-        </div>
+    <div class="info-box">
+        Welcome to the Voting section! Participate in voting or check ongoing and applied events.
     </div>
 </div>
 
-<!-- Events to be Voted Section -->
+
 <div>
     <h2> Cast your vote! </h2>
     {% if events_to_be_voted_for_user_id and events_to_be_voted_for_user_id|length > 0 %}
@@ -74,7 +69,6 @@
     {% endif %}
 </div>
 
-<!-- Ongoing Voting Section -->
 <div>
     <h2>Voting on events created by you</h2>
     {% if events_by_user_id_in_voting and events_by_user_id_in_voting|length > 0 %}
@@ -117,7 +111,6 @@
     {% endif %}
 </div>
 
-<!-- Events Applied By User Section -->
 <div>
     <h2> Voting on events applied for you </h2>
     {% if events_applied_for_user_id_in_voting and events_applied_for_user_id_in_voting|length > 0 %}
