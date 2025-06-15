@@ -46,7 +46,7 @@ Welcome to the **Commune App**, a collaborative platform designed to manage even
 1. [Set-up](#setup)
 1. [Overview](#overview)  
 2. [Account Management](#account-management)  
-3. [Score Rable](#score-table)  
+3. [Score Table](#score-table)  
 4. [Events and Voting](#events-and-voting)  
 5. [Todos](#todos)  
 
