@@ -54,36 +54,29 @@ The Commune App is all about creating a communal environment where members can p
 
 1. **Clone this repository** to your local machine and navigate to its root directory.
 
-2. **Create a `.env` file** in that root directory with the following lines:
-   ```bash
-   DATABASE_URL=<your-local-database-url>
-   SECRET_KEY=<your-secret-key>
-   SQLALCHEMY_TRACK_MODIFICATIONS=False
-   ```
-
-3. **Activate a virtual environment** and install the dependencies:
+2. **Activate a virtual environment** and install the dependencies:
    ```bash
    python3 -m venv venv
    source venv/bin/activate
    pip install -r requirements.txt
    ```
 
-4. **Set up the database schema**:
+3. **Set up the database schema**:
    ```bash
-   psql < db_schema.sql
+   sqlite3 database_name.db < db_schema.sql
    ```
-5. **Add example entreis **:
+4. **Add example entreis **:
    ```bash
-   psql < db_example_entries.sql
+   sqlite3 database_name.db <db_example_entries.sql
    ```
 
-6. **Run the application**:
+5. **Run the application**:
    ```bash
    flask run
    ```
-7. **Reseting the database **:
+5. **Reseting the database **:
    ```bash
-   psql < db_drop_everything.sql
+   sqlite3 database_name.db < db_drop_everything.sql
    ```
 
 ---
