@@ -27,6 +27,14 @@ Tarkempi selostus toiminallisuudesta:
 - Events listaukset epäselviä äänestyksessä ja muutenkin. Tämän kehittäminen sekä hakutoiminto.
 - Sovellus aiemmin kehitetty englanniksi, jos kieli tulee muuttaa, sen tekeminen
 
+## Tilanne välipalautus 2
+- Olin aiemmin tehnyt sovelluksen käyttäen ei-sallittuja teknologioista Postgres sql sekä käyttänyt flask wtf ja bootstrap. Tällä viikolla refaktoroin koodin ja otin nämä pois käytöstä
+- Suurin osa toiminnallisuudesta toteutettu
+- Hakutoiminnallisuus puuttuu vielä
+- CSS parantelua seuraavaksi
+- Ilmoitusten parantamista sovelluksessa
+
+
 # Commune App
 
 Welcome to the **Commune App**, a collaborative platform designed to manage events, votes, scoring, and tasks (todos) among multiple user accounts. This README provides an overview of how to set up and use the app’s core features.
@@ -38,7 +46,7 @@ Welcome to the **Commune App**, a collaborative platform designed to manage even
 1. [Set-up](#setup)
 1. [Overview](#overview)  
 2. [Account Management](#account-management)  
-3. [Score Graph](#score-graph)  
+3. [Score Rable](#score-table)  
 4. [Events and Voting](#events-and-voting)  
 5. [Todos](#todos)  
 
@@ -102,9 +110,9 @@ Only logged-in users can access the Commune App’s features such as viewing sco
 
 ---
 
-## Score Graph
+## Score Table
 
-Once logged in, you’ll land on the [**Home**](http://127.0.0.1:8000/) page. Here, you’ll see a **table** displaying the accumulated scores for different accounts in the system. This graph gives you an at-a-glance perspective of each user’s current standing based on events and todos.
+Once logged in, you’ll land on the [**Home**](http://127.0.0.1:8000/) page. Here, you’ll see a **table** displaying the accumulated scores for different accounts in the system. This table gives you an at-a-glance perspective of each user’s current standing based on events and todos.
 
 ---
 
