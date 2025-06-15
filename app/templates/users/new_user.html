@@ -1,8 +1,10 @@
 {% block title %}Create New User{% endblock %}
 
-{% block content %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock %}
 
-{% include 'components/_navbar.html' %}
+{% block content %}
 
 <h2>Create New User</h2>
 

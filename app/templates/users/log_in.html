@@ -1,8 +1,11 @@
 {% block title %} Login  {% endblock %}
 
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock %}
+
 {% block content %}
 
-{% include 'components/_navbar.html' %}
 {% include 'components/_alerts.html' %}
 
 <h2>Sign In</h2>

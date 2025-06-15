@@ -1,4 +1,6 @@
-{% block title %} Main {% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock %}
 
 {% block content %}
 
@@ -6,58 +8,51 @@
 
 <!-- Introductory Text Section -->
 <div>
-    <div>
-        <div>
-            <!-- Add your introduction/explanation here -->
-            <div class="alert alert-info" role="alert">
-                Welcome to the Events section! Here, you can create new events that have taken place in your commune and
-                assign scores to people who you believe deserve them.
-                For an event’s score to be approved, it must receive the majority of votes from your commune. You can
-                even create events for yourself and let others vote on them!
-            </div>
-        </div>
+    <!-- Add your introduction/explanation here -->
+    <div class="info-box">
+        Welcome to the Events section! Here, you can create new events that have taken place in your commune and
+        assign scores to people who you believe deserve them.
+        For an event’s score to be approved, it must receive the majority of votes from your commune. You can
+        even create events for yourself and let others vote on them!
     </div>
 </div>
 
+
 <!-- Main Content Section -->
 <div>
-    <div>
-        <div>
-            <h1>Passed events</h1>
-            <a class="btn btn-primary" href="{{ url_for('events.new_event') }}">
-                Add New Event
-            </a>
-            <a class="btn btn-success" href="{{ url_for('voting.main_voting') }}">
-                Voting
-            </a>
-            <!-- Render the events table -->
-            <table class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">Applied For Username</th>
-                        <th scope="col">Event</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Event Score</th>
-                        <th scope="col">Event Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for item in all_events %}
-                    <tr>
-                        <th scope="row">{{ loop.index }}</th>
-                        <td>{{ item.username }}</td>
-                        <td>{{ item.applied_for_username }}</td>
-                        <td>{{ item.event }}</td>
-                        <td>{{ item.description }}</td>
-                        <td>{{ item.event_score }}</td>
-                        <td>{{ item.event_date }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
+    <h1>Passed events</h1>
+    <a class="btn btn-primary" href="{{ url_for('events.new_event') }}">
+        Add New Event
+    </a>
+    <a class="btn btn-success" href="{{ url_for('voting.main_voting') }}">
+        Voting
+    </a>
+    <!-- Render the events table -->
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Username</th>
+                <th scope="col">Applied For Username</th>
+                <th scope="col">Event</th>
+                <th scope="col">Description</th>
+                <th scope="col">Event Score</th>
+                <th scope="col">Event Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in all_events %}
+            <tr>
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{ item.username }}</td>
+                <td>{{ item.applied_for_username }}</td>
+                <td>{{ item.event }}</td>
+                <td>{{ item.description }}</td>
+                <td>{{ item.event_score }}</td>
+                <td>{{ item.event_date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}

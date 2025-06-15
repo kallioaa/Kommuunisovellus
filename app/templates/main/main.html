@@ -1,4 +1,6 @@
-{% block title %} Main {% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock %}
 
 {% block content %}
 {% include 'components/_navbar.html' %}
@@ -6,7 +8,7 @@
 <div>
     <div>
         <div>
-            <div class="alert alert-info" role="alert">
+            <div class="info-box">
                 Welcome to the commune credit system! In this application you can cumulate scores for each individual in
                 your commune.
             </div>
