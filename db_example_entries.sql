@@ -5,7 +5,7 @@ INSERT INTO users (username, password, email) VALUES
 ('Pekka', 'pbkdf2_sha256$260000$randomsalt3$hashedpassword3', 'pekka@example.com'),
 ('Sanna', 'pbkdf2_sha256$260000$randomsalt4$hashedpassword4', 'sanna@example.com'),
 ('Jukka', 'pbkdf2_sha256$260000$randomsalt5$hashedpassword5', 'jukka@example.com'),
-('Testaaja', '$pbkdf2-sha256$29000$da7VOkfovffeWyvlfA8BQA$mxGr9GRXJi.lSLvAEJPB.qK50AyKmXJ8b9NXkcvGCgg', 'testaaja@gmail.com');
+('Testaaja', 'scrypt:32768:8:1$xenzQUmicAZvOTmC$5e71784d9dce867a817b7fb2992d394662191bdbcb71f5a3d2e550259555be8064dd9da19ef1f763bd79049d8f602403d9a5010a22ff1291e34877a7052d5454', 'testaaja@gmail.com');
 
 -- Insert example events
 INSERT INTO events (id, user_id, applied_for_id, event, description, event_score, event_date, voting_ended, passed) VALUES

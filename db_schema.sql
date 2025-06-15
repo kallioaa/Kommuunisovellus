@@ -13,11 +13,11 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS events (
     id INTEGER PRIMARY KEY AUTOINCREMENT, 
     user_id INTEGER REFERENCES users(id) ON DELETE CASCADE NOT NULL,
-    applied_for_id INTEGER REFERENCES users(id) ON DELETE NOT NULL,
+    applied_for_id INTEGER REFERENCES users(id) ON DELETE CASCADE NOT NULL,
     event TEXT NOT NULL,
     description TEXT,
     event_score INTEGER NOT NULL,
-    event_date DATE NOT NOT NULL,
+    event_date DATE NOT NULL,
     voting_ended INTEGER NOT NULL DEFAULT 0,
     passed INTEGER NOT NULL DEFAULT 0
 );

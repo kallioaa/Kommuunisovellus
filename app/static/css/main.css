@@ -35,7 +35,6 @@ a {
     /* Deep purple */
     text-decoration: none;
     font-weight: 600;
-    transition: color 0.3s ease;
 }
 
 a:hover {
@@ -80,7 +79,6 @@ button {
     /* White background */
     color: #c900d9;
     /* Pink-purple text */
-    transition: all 0.2s ease-in-out;
 }
 
 input:focus,
@@ -97,7 +95,6 @@ button {
     border: none;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(201, 0, 217, 0.3);
-    transition: background 0.3s ease, transform 0.1s ease-in-out;
 }
 
 button:hover {
@@ -169,7 +166,6 @@ tbody tr:nth-child(even) {
 
 tbody tr:hover {
     background-color: rgba(255, 77, 251, 0.1);
-    transition: background-color 0.3s ease;
 }
 
 /* ✨ Optional: Center table in its container */
@@ -221,7 +217,6 @@ tbody tr:hover {
     font-weight: 600;
     position: relative;
     padding: 0.5rem;
-    transition: all 0.3s ease;
 }
 
 .navbar-links a:hover {
@@ -235,7 +230,6 @@ tbody tr:hover {
     height: 2px;
     width: 0%;
     background: #c900d9;
-    transition: width 0.3s ease;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -257,7 +251,6 @@ tbody tr:hover {
     color: #c900d9;
     border: 1px solid rgba(180, 0, 230, 0.7);
     backdrop-filter: blur(6px);
-    transition: all 0.3s ease-in-out;
 }
 
 .info-box strong {
