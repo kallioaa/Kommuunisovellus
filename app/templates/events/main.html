@@ -8,7 +8,7 @@
 {% include 'components/_alerts.html' %}
 
 <div>
-    <div class="info-box">
+    <div class="container">
         Welcome to the Events section! Here, you can create new events that have taken place in your commune and
         assign scores to people who you believe deserve them.
         For an event’s score to be approved, it must receive the majority of votes from your commune. You can
@@ -16,15 +16,17 @@
     </div>
 </div>
 
+<div class="flex-right">
+    <a class="button-link" href="{{ url_for('events.new_event') }}">
+        Add New Event
+    </a>
+    <a class="button-link" href="{{ url_for('voting.main_voting') }}">
+        Voting
+    </a>
+</div>
 
 <div>
     <h1>Passed events</h1>
-    <a class="btn btn-primary" href="{{ url_for('events.new_event') }}">
-        Add New Event
-    </a>
-    <a class="btn btn-success" href="{{ url_for('voting.main_voting') }}">
-        Voting
-    </a>
     <table class="table">
         <thead>
             <tr>

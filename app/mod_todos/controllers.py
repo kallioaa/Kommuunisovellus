@@ -24,7 +24,7 @@ mod_todos = Blueprint("todos", __name__, url_prefix="/todos")
 
 # function for rendering the main todos page
 @mod_todos.route("/")
-def main_todos():
+def main():
     if "user_id" not in session:
         return redirect(url_for("users.log_in"))
     user_id = session.get("user_id")
@@ -65,7 +65,7 @@ def new_todo():
             due_date=due_date,
         ):
             flash("Todo created successfully!", "success")
-            return redirect(url_for("todos.main_todos"))
+            return redirect(url_for("todos.main"))
         else:
             flash("Problem when creating a new todo.", "danger")
             return render_template("todos/new_todo.html")
@@ -83,10 +83,10 @@ def assign_for_todo():
     try:
         assign_todo_to_user(todo_id, user_id)
         flash("Todo assigned successfully!", "success")
-        return redirect(url_for("todos.main_todos"))
+        return redirect(url_for("todos.main"))
     except Exception as e:
         flash(f"Failed to assign todo: {str(e)}", "danger")
-        return redirect(url_for("todos.main_todos"))
+        return redirect(url_for("todos.main"))
 
 # Mark a todo as completed by the assigned user.
 @mod_todos.route("/complete_todo", methods=["GET", "POST"])
@@ -100,10 +100,10 @@ def complete_todo():
         flash("You are not assigned to this todo.", "danger")
     try:
         complete_todo_in_database(todo_id)
-        return redirect(url_for("todos.main_todos"))
+        return redirect(url_for("todos.main"))
     except Exception as e:
         flash(f"Failed to complete todo: {str(e)}", "danger")
-        return redirect(url_for("todos.main_todos"))
+        return redirect(url_for("todos.main"))
 
 # Verify a completed todo and update its status.
 @mod_todos.route("/verify_todo", methods=["GET", "POST"])
@@ -119,10 +119,10 @@ def verify_todo():
     try:
         verify_todo_in_database(todo_id)
         flash("Todo verified successfully!", "success")
-        return redirect(url_for("todos.main_todos"))
+        return redirect(url_for("todos.main"))
     except Exception as e:
         flash(f"Failed to verify todo: {str(e)}", "danger")
-        return redirect(url_for("todos.main_todos"))
+        return redirect(url_for("todos.main"))
 
 # Function to handle the deletion of a todo
 @mod_todos.route("/delete_todo", methods=["GET", "POST"])
@@ -137,7 +137,7 @@ def delete_todo():
         # Assuming a function delete_todo_from_database exists to handle the deletion
         drop_todo_from_database(todo_id)
         flash("Todo deleted successfully!", "success")
-        return redirect(url_for("todos.main_todos"))
+        return redirect(url_for("todos.main"))
     except Exception as e:
         flash(f"Failed to delete todo: {str(e)}", "danger")
-        return redirect(url_for("todos.main_todos"))
+        return redirect(url_for("todos.main"))

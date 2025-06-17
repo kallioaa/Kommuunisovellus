@@ -7,8 +7,7 @@
 {% include 'components/_navbar.html' %}
 {% include 'components/_alerts.html' %}
 
-<div class="info-box">
-    <p>
+<div class="container">
         With Todos you van create tasks for other people in your commune to complete. When someone completes your Todo your credits will be change to their account. This application allows you to manage todos efficiently. You can create new tasks by
         clicking on the "Add New Todo" button. 
         If a task isn’t assigned to anyone yet, you’ll see an "Apply for todo"
@@ -16,14 +15,15 @@
         assignee can mark the task as completed. If you’re the one who created the task,
         you’ll get an option to verify it once it’s completed. This helps ensure tasks
         are properly reviewed and recognized.
-    </p>
+</div>
+<div class="flex-right">
+    <a class="button-link" href="{{ url_for('todos.new_todo') }}">
+        Create Todo
+    </a>
 </div>
 
 <div>
     <h1>All Todos</h1>
-    <a href="{{ url_for('todos.new_todo') }}">
-        Create Todo
-    </a>
     <div>
         <table class="table">
             <thead>
