@@ -68,18 +68,23 @@ The Commune App is all about creating a communal environment where members can p
    source venv/bin/activate
    pip install flask
    ```
+3. **Set up a secret key into a .env file. The file should look like this**
+   ```bash
+   SECRET_KEY='<your_secret_key>'
+   ```
 
-3. **Set up the database schema**:
+
+4. **Set up the database schema**:
    ```bash
    sqlite3 database.db < db_schema.sql
    ```
    
-4. **Add example entries**:
+5. **Add example entries**:
    ```bash
    sqlite3 database.db <db_example_entries.sql
    ```
 
-5. **Run the application**:
+6. **Run the application**:
    ```bash
    flask run
    ```
