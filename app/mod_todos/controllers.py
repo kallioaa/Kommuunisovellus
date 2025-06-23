@@ -80,6 +80,24 @@ def new_todo():
 # update an existing todo
 @mod_todos.route("/update_todo", methods=["GET", "POST"])
 def update_todo():
+
+    # Check if the user is authorized to update the todo
+    def _update_authorized():
+        # user id from session
+        user_id_session = session.get("user_id")
+
+        # get todo id from request
+        todo_id_request = request.args.get("todo_id") 
+
+        # get todo entry by id
+        todo_db = get_todo_by_id(todo_id_request)
+        todo_user_id_db = todo_db["user_id"] if todo_db else None
+
+        if user_id_session != todo_user_id_db:
+            return False
+        
+        return True
+        
     if "user_id" not in session:
         return redirect(url_for("users.log_in"))
     
@@ -93,6 +111,11 @@ def update_todo():
         todo_entry = get_todo_by_id(todo_id)
         if not todo_entry:
             flash("Todo not found.", "danger")
+            return redirect(url_for("todos.main"))
+        
+        # Check if the user is authorized to update the todo
+        if not _update_authorized():
+            flash("You are not authorized to update this todo.", "danger")
             return redirect(url_for("todos.main"))
         
         return render_template("todos/update_todo.html", todo_entry=todo_entry)
@@ -113,6 +136,15 @@ def update_todo():
 
         # todo from database pass it to the template if problems
         todo_entry = get_todo_by_id(todo_id)
+
+        if not todo_entry:
+            flash("Todo not found.", "danger")
+            return redirect(url_for("todos.main"))
+        
+        # Check if the user is authorized to update the todo
+        if not _update_authorized():
+            flash("You are not authorized to update this todo.", "danger")
+            return redirect(url_for("todos.main"))
         
         if not todo or not description or not todo_score or not due_date:
             flash("Some required fields are not filled.", "danger")
