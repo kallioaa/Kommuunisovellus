@@ -17,11 +17,11 @@ INSERT INTO events (id, user_id, applied_for_id, event, description, event_score
 
 -- Insert example todos
 INSERT INTO todos (user_id, assigned_to_id, todo, description, todo_score, due_date, completed, verified) VALUES
-(1, 2, 'Siivous', 'Siivoa yhteiset tilat', 50, '2023-11-25', FALSE, FALSE),
+(1, 2, 'Siivous', 'Siivoa yhteiset tilat', 50, '2023-11-25', TRUE, TRUE),
 (3, 4, 'Kirjojen järjestäminen', 'Järjestä kirjat aakkosjärjestykseen', 30, '2023-11-30', FALSE, FALSE),
-(5, 1, 'Joogamattojen puhdistus', 'Puhdista joogamatot tunnin jälkeen', 20, '2023-12-01', FALSE, FALSE),
+(6, 1, 'Joogamattojen puhdistus', 'Puhdista joogamatot tunnin jälkeen', 20, '2023-12-01', TRUE, TRUE),
 (2, 3, 'Ruoanlaittovälineiden tarkistus', 'Tarkista että kaikki välineet ovat kunnossa', 40, '2023-12-05', FALSE, FALSE),
-(4, 5, 'Teknologiatarvikkeiden inventointi', 'Laske ja tarkista kaikki tarvikkeet', 60, '2023-12-10', FALSE, FALSE);
+(4, 6, 'Teknologiatarvikkeiden inventointi', 'Laske ja tarkista kaikki tarvikkeet', 60, '2023-12-10', TRUE, TRUE);
 
 -- Insert example votes for two users
 INSERT INTO votes (event_id, user_id, vote) VALUES
@@ -34,3 +34,12 @@ INSERT INTO votes (event_id, user_id, vote) VALUES
 (4, 5, TRUE),
 (5, 1, TRUE),
 (5, 2, FALSE);
+
+-- insert example confirmed scores
+INSERT INTO confirmed_score_log (user_id, event_id, todo_id, score) VALUES
+(1, null, 1, -50),
+(2, null, 1, 50),
+(6, null, 3, -30),
+(1, null, 3, 30),
+(4, null, 5, -60),
+(6, null, 5, 60);
