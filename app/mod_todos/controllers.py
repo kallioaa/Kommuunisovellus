@@ -14,10 +14,13 @@ from flask import (
 from app.mod_todos.models import (
     add_todo_to_database,
     get_all_todos,
+    get_todo_by_id,
     complete_todo_in_database,
     verify_todo_in_database,
+    modify_todo_in_database,
     assign_todo_to_user,
     drop_todo_from_database
+    
 )
 
 mod_todos = Blueprint("todos", __name__, url_prefix="/todos")
@@ -69,6 +72,61 @@ def new_todo():
         else:
             flash("Problem when creating a new todo.", "danger")
             return render_template("todos/new_todo.html")
+        
+
+# update an existing todo
+@mod_todos.route("/update_todo", methods=["GET", "POST"])
+def update_todo():
+    if "user_id" not in session:
+        return redirect(url_for("users.log_in"))
+    
+    if request.method == "GET":
+        todo_id = request.args.get("todo_id")
+        if not todo_id:
+            flash("Todo ID is required for updating.", "danger")
+            return redirect(url_for("todos.main"))
+        
+        # get todo by id
+        todo_entry = get_todo_by_id(todo_id)
+        if not todo_entry:
+            flash("Todo not found.", "danger")
+            return redirect(url_for("todos.main"))
+        
+        return render_template("todos/update_todo.html", todo_entry=todo_entry)
+
+    if request.method == "POST":
+        # check csrf token
+        form = request.form
+        if form["csrf_token"] != session["csrf_token"]:
+            flash("Invalid CSRF token.", "danger")
+            return redirect(url_for("users.log_in"))
+        
+        # Get form data and validate
+        todo_id = request.args.get("todo_id")
+        todo = form["todo"]
+        description = form["description"]
+        todo_score = form["todo_score"]
+        due_date = form["due_date"]
+
+        # todo from database pass it to the template if problems
+        todo_entry = get_todo_by_id(todo_id)
+        
+        if not todo or not description or not todo_score or not due_date:
+            flash("Some required fields are not filled.", "danger")
+            return render_template("todos/update_todo.html", todo_entry=todo_entry)
+        
+        if modify_todo_in_database(
+            todo_id=todo_id,
+            todo=todo,
+            description=description,
+            todo_score=todo_score,
+            due_date=due_date,
+        ):
+            flash("Todo updated successfully!", "success")
+            return redirect(url_for("todos.main"))
+        else:
+            flash("Problem when updating the todo.", "danger")
+            return render_template("todos/update_todo.html", todo_entry=todo_entry)
         
 
 # Assign the current user to a todo.

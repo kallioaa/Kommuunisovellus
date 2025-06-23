@@ -30,6 +30,24 @@ def get_all_todos():
         print(f"Error retrieving todos: {e}")
         return None
 
+# get todo by id
+def get_todo_by_id(todo_id):
+    sql = """
+        SELECT 
+            *
+        FROM todos
+        WHERE id = ?
+        """
+    try:
+        rows = db.query(sql, [todo_id])
+        todo = dict(rows[0])
+        return todo
+    except Exception as e:
+        print(f"Error retrieving todo by ID: {e}")
+        return None 
+
+
+
 # Insert a new todo into the database and return its primary key.
 def add_todo_to_database(user_id, todo, description, todo_score, due_date):
     try:
@@ -47,6 +65,25 @@ def add_todo_to_database(user_id, todo, description, todo_score, due_date):
     except Exception as e:
         print(f"Error inserting todo: {e}")
         return None
+
+# Modify an existing todo in the database.
+def modify_todo_in_database(todo_id, todo, description, todo_score, due_date):
+    try:
+        sql = """
+            UPDATE todos
+            SET todo = ?, description = ?, todo_score = ?, due_date = ?
+            WHERE id = ?
+        """
+        db.execute(
+            sql,
+            [todo, description, todo_score, due_date, todo_id],
+        )
+
+        return True
+    except Exception as e:  
+        print(f"Error updating todo: {e}")
+        return None
+    
 
 # Function to assign a todo to a user.
 def assign_todo_to_user(todo_id, user_id):
