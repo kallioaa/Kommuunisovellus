@@ -35,7 +35,7 @@ def log_in():
         session["csrf_token"] = secrets.token_hex(16)  # Generate a CSRF token
         session["user_id"] = user_id
         session["username"] = username
-        return redirect(url_for("main.main"))
+        return redirect(url_for("mod_user_summary.main"))
 
 
 # Handle new user registration.

@@ -28,7 +28,6 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Item ID</th>
                     <th scope="col">Created by</th>
                     <th scope="col">Assigned to</th>
                     <th scope="col">Todo</th>
@@ -43,7 +42,6 @@
             <tbody>
                 {% for item in todos %}
                 <tr>
-                    <th scope="row">{{ item.todo_id }}</th>
                     <td>{{ item.username }}</td>
                     <td>
                         {% if item.assigned_to_id or item.user_id == user_id %}
@@ -91,6 +89,7 @@
                             style="display:inline;">
                         <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
+                        <a href="{{ url_for('todos.update_todo', todo_id=item.todo_id) }}" class="btn btn-secondary">Update</a>
                         {% endif %}
                     </td>
                 </tr>

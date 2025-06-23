@@ -17,10 +17,12 @@ body {
 }
 
 h1,
-h2 {
+h2,
+h3,
+h4{
     font-weight: 700;
+    margin-top: 0.75rem;
     margin-bottom: 0.75rem;
-    text-transform: uppercase;
     color: #e000ff;
     /* Bright pink-purple */
     letter-spacing: 0.05em;
@@ -48,6 +50,12 @@ a:hover {
     border-radius: 16px;
     backdrop-filter: blur(8px);
     box-shadow: 0 0 20px rgba(201, 0, 217, 0.15);
+}
+
+.summary-wrapper {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .flex {

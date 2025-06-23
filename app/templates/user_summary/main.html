@@ -1,0 +1,57 @@
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock %}
+
+{% block content %}
+{% include 'components/_navbar.html' %}
+{% include 'components/_alerts.html' %}
+
+<div>
+    <div>
+        <div>
+            <div>
+                <h3>Summary for {{username}}</h3>
+                <h4>Total Credit Score: {{ total_score }}</h4>
+            </div>
+            <div class="summary-wrapper">
+                <div class="container">
+                    <h4>Events Summary for {{username}}</h4>
+                    <p>Total Events Created: {{ event_summary.events_created_by_user }}</p>
+                    <p>Passed Events for user: {{ event_summary.confirmed_events_assigned_to_user }}</p>
+                    <p>Total Events Score: {{ event_summary.total_confirmed_event_score }}</p>
+                </div>
+                <div class="container">
+                    <h4>Todos Summary for {{username}}</h4>
+                    <p>Total Todos Created: {{ todo_summary.todos_created_by_user }}</p>
+                    <p>Total Todos Completed: {{ todo_summary.completed_todos_assigned_to_user }}</p>
+                    <p>Total Todo Score: {{ todo_summary.total_confirmed_todo_score }}</p>
+                    </div>
+            </div>
+            <div>
+                <h4>Commune Credit Scores Table</h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Total Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for entry in entries_score_summary %}
+                        <tr>
+                            {% if entry.user_id == user_id %}
+                                <td><strong>{{ entry.username }}</strong></td>
+                                <td><strong>{{ entry.score }}</strong></td>
+                            {% else %}
+                                <td>{{ entry.username }}</td>
+                                <td>{{ entry.score }}</td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}            
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
