@@ -54,22 +54,22 @@ def new_user():
         # Check if all fields are filled
         if not username or not password or not password_repeat or not email:
             flash("All fields are required.", "danger")
-            return render_template("users/new_user.html")
+            return render_template("users/new_user.html", user_entry=form)
 
         # Check if passwords match
         if password != password_repeat:
             flash("Passwords do not match.", "danger")
-            return render_template("users/new_user.html")
+            return render_template("users/new_user.html", user_entry=form)
         
         # check if username already exists
         if username_exists(username):
             flash("Username already exists.", "danger")
-            return render_template("users/new_user.html")
+            return render_template("users/new_user.html", user_entry=form)
         
         # check if email already exists
         if email_exists(email):
             flash("Email already exists.", "danger")
-            return render_template("users/new_user.html")
+            return render_template("users/new_user.html", user_entry=form)
         
         # Hash the password
         password_hashed = generate_password_hash(password)
@@ -80,7 +80,7 @@ def new_user():
             return redirect(url_for("users.log_in"))
         else:
             flash("Failed to create user. Please try again.", "danger")
-            return render_template("users/new_user.html")
+            return render_template("users/new_user.html",  user_entry=form)
 
 
 

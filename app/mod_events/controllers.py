@@ -48,7 +48,7 @@ def new_event():
         event_date = form["event_date"]
         if not applying_for_username or not event or not event_score or not event_date:
             flash("Some required fields are not filled.", "danger")
-            return render_template("events/new_event.html", applying_event_choices=choices)
+            return render_template("events/new_event.html", applying_event_choices=choices, event_entry=form)
 
         event_dict = {
             "user_id": user_id,
@@ -65,9 +65,9 @@ def new_event():
             vote_added = add_vote(user_id=user_id, event_id=event_id, vote=True)
             if not vote_added:
                 flash("Failed to add vote.", "danger")
-                return render_template("events/new_event.html", applying_event_choices=choices)
+                return render_template("events/new_event.html", applying_event_choices=choices, event_entry=form)
             
             flash("Event created and vote added successfully!", "success")
             return redirect(url_for("events.main"))
         flash("Failed to create event.", "danger")
-        return render_template("events/new_event.html", applying_event_choices=choices)
+        return render_template("events/new_event.html", applying_event_choices=choices, event_entry=form)

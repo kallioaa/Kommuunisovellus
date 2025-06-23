@@ -2,40 +2,42 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 {% endblock %}
 
-
 {% block content %}
 
 {% include 'components/_alerts.html' %}
 
 <h2>Create New Todo</h2>
 
-{% include 'components/_alerts.html' %}
-
 <div>
     <form method="POST" action="{{ url_for('todos.new_todo') }}">
         <div>
             <label for="todo">Todo Title:</label><br>
-            <input type="text" id="todo" name="todo" required placeholder="Enter todo title">
+            <input type="text" id="todo" name="todo" required placeholder="Enter todo title"
+                value="{{ todo_entry.todo if todo_entry }}">
         </div>
 
         <div>
             <label for="description">Description:</label><br>
             <textarea id="description" name="description" placeholder="Enter description (optional)" rows="4"
-                cols="50"></textarea>
+                cols="50">{{ todo_entry.description if todo_entry }}</textarea>
         </div>
 
         <div>
             <label for="todo_score">Todo Score:</label><br>
-            <input type="number" id="todo_score" name="todo_score" required placeholder="Enter score">
+            <input type="number" id="todo_score" name="todo_score" required placeholder="Enter score"
+                value="{{ todo_entry.todo_score if todo_entry }}">
         </div>
 
         <div>
             <label for="due_date">Due Date:</label><br>
-            <input type="date" id="due_date" name="due_date" required>
+            <input type="date" id="due_date" name="due_date" required
+                value="{{ todo_entry.due_date if todo_entry }}">
         </div>
+
         <div>
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-        <div>
+        </div>
+
         <div>
             <button type="submit">Create Todo</button>
         </div>
@@ -43,7 +45,7 @@
 </div>
 
 <div>
-    <a href="{{ url_for('todos.main') }}"> Go back</a>
+    <a href="{{ url_for('todos.main') }}">Go back</a>
 </div>
 
 {% endblock %}

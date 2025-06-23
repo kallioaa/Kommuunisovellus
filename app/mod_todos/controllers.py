@@ -41,6 +41,7 @@ def new_todo():
         return redirect(url_for("users.log_in"))
     
     if request.method == "GET":
+
         return render_template("todos/new_todo.html")
     
     if request.method == "POST":
@@ -56,9 +57,11 @@ def new_todo():
         description = form["description"]
         todo_score = form["todo_score"]
         due_date = form["due_date"]
+
+
         if not todo or not description or not todo_score or not due_date:
             flash("Some required fields are not filled.", "danger")
-            return render_template("todos/new_todo.html")
+            return render_template("todos/new_todo.html", todo_entry=form)
         
         if add_todo_to_database(
             user_id=user_id,
@@ -71,7 +74,7 @@ def new_todo():
             return redirect(url_for("todos.main"))
         else:
             flash("Problem when creating a new todo.", "danger")
-            return render_template("todos/new_todo.html")
+            return render_template("todos/new_todo.html", todo_entry=form)
         
 
 # update an existing todo
