@@ -40,9 +40,6 @@ def main():
     # get todo summary
     todo_summary = get_todo_summary(user_id)
 
-    print(f"User ID: {type(user_id)}, Username: {username}, Total Score: {total_score}")
-
-    
     return render_template("user_summary/main.html", 
                            entries_score_summary=entries_score_summary,
                            user_id=int(user_id),
