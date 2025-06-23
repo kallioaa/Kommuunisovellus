@@ -1,0 +1,35 @@
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock %}
+
+{% block content %}
+{% include 'components/_navbar.html' %}
+{% include 'components/_alerts.html' %}
+
+<div>
+    <div>
+        <div>
+            <div>
+                <form method="get" action="{{ url_for('user_summary.user_search') }}">
+                    <input type="text" id="username" name="search_query"
+                        placeholder="Find users by username or email (enter to search):" value="{{ search_query if search_query}}">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {% if results %}
+    <ul>
+        {% for user in results %}
+        <li>
+            <form method="POST" action="{{ url_for('user_summary.main', user_id=user.id, username=user.username) }}">
+                <input type="hidden" name="username" value="{{ user.username }}">
+                <button type="submit">{{ user.username }} ({{ user.email }})</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+
+{% endblock %}

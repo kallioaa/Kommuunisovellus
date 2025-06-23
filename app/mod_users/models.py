@@ -56,7 +56,7 @@ def get_user_id(username):
 
 def get_usernames_and_emails():
     try:
-        sql = "SELECT username, email FROM users"
+        sql = "SELECT id, username, email FROM users"
         result = db.query(sql)
         return result
     except Exception as e:
