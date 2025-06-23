@@ -24,9 +24,6 @@ mod_voting = Blueprint("voting", __name__, url_prefix="/voting")
 # Render the main voting page with events requiring the user's attention.
 @mod_voting.route("/", methods=["GET", "POST"])
 def main_voting():
-    """
-    Render the main voting page with events requiring the user's attention.
-    """
     if "user_id" not in session:
         return redirect(url_for("users.log_in"))
 
@@ -48,12 +45,6 @@ def main_voting():
 # voting on a event
 @mod_voting.route("/vote_event", methods=["GET", "POST"])
 def vote_event():
-    """
-    Cast a vote (approve or disapprove) for a given event.
-    Expects:
-      - event_id (query parameter or form data)
-      - vote (query parameter or form data): "true" or "false"
-    """
     if "user_id" not in session:
         return redirect(url_for("users.log_in"))
 
