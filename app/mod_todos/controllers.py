@@ -20,7 +20,6 @@ from app.mod_todos.models import (
     modify_todo_in_database,
     assign_todo_to_user,
     drop_todo_from_database
-    
 )
 
 mod_todos = Blueprint("todos", __name__, url_prefix="/todos")
