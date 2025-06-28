@@ -84,12 +84,14 @@
                     </td>
                     <td>
                         {% if item.user_id == user_id and not item.assigned_to_username%}
-                        <form method="POST"
-                            action="{{ url_for('todos.delete_todo', todo_id=item.todo_id) }}"
-                            style="display:inline;">
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                        <a href="{{ url_for('todos.update_todo', todo_id=item.todo_id) }}" class="button-link">Update</a>
+                        <div>
+                            <form method="POST" action="{{ url_for('todos.delete_todo', todo_id=item.todo_id) }}" style="display:inline;">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                            <a href="{{ url_for('todos.update_todo', todo_id=item.todo_id) }}" class="button-link"
+                                style="display: inline">Update</a>
+
+                        </div>
                         {% endif %}
                     </td>
                 </tr>

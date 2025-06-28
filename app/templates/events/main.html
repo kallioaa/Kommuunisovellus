@@ -16,14 +16,19 @@
     </div>
 </div>
 
-<div class="flex-right">
-    <a class="button-link" href="{{ url_for('events.new_event') }}">
-        Add New Event
-    </a>
-    <a class="button-link" href="{{ url_for('voting.main_voting') }}">
-        Voting
-    </a>
+<div class="event-buttons">
+    <div>
+        <a class="button-link" href="{{ url_for('events.new_event') }}">
+            Add New Event
+        </a>
+    </div>
+    <div>
+        <a class="button-link" href="{{ url_for('voting.main_voting') }}">
+            Voting
+        </a>
+    </div>
 </div>
+
 
 <div>
     <h1>Passed events</h1>
