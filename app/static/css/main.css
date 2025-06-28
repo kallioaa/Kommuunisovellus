@@ -42,10 +42,10 @@ a:hover {
 }
 
 .container {
-    max-width: 900px;
-    margin: 20 auto;
     padding: 2rem;
+    margin: 1rem;
     background-color: rgba(201, 0, 217, 0.05);
+    border-color: aliceblue;
     /* subtle pale pink-purple overlay */
     border-radius: 16px;
     backdrop-filter: blur(8px);
@@ -54,8 +54,9 @@ a:hover {
 
 .summary-wrapper {
     display: flex;
-    gap: 10px;
+    gap: 2rem;
     flex-wrap: wrap;
+    justify-content: flex-start
 }
 
 
