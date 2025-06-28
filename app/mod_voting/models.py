@@ -104,7 +104,8 @@ def get_events_to_be_voted_for_user_id(user_id):
                 SELECT event_id FROM votes WHERE user_id = ?
             )
             AND pending_votes > 0
-            AND voting_ended = FALSE;
+            AND voting_ended = FALSE
+            ORDER BY pending_votes asc, event_date asc;
         """
         result = db.query(sql, [user_id])
         return result
@@ -118,7 +119,8 @@ def get_all_events_in_voting():
         sql = """
             SELECT DISTINCT * 
             FROM events_and_votes_master_view
-            WHERE voting_ended = FALSE;
+            WHERE voting_ended = FALSE
+            ORDER BY pending_votes ASC, event_date ASC;
         """
         result = db.query(sql)
         return result
