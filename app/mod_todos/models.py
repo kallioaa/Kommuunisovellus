@@ -94,9 +94,10 @@ def assign_todo_to_user(todo_id, user_id):
             WHERE id = ?
         """
         db.execute(sql, [user_id, todo_id])
+        return True
     except Exception as e:
         print(f"Error assigning todo: {e}")
-        raise e
+        return None
 
 # Mark an existing todo as completed in the database.
 def complete_todo_in_database(todo_id):
@@ -107,9 +108,10 @@ def complete_todo_in_database(todo_id):
             WHERE id = ?
         """
         db.execute(sql, [todo_id])
+        return True
     except Exception as e:
         print(f"Error completing todo: {e}")
-        raise e
+        return None
 
 # Mark an existing todo as verified in the database and update the score log accordingly.
 def verify_todo_in_database(todo_id):
@@ -123,12 +125,14 @@ def verify_todo_in_database(todo_id):
         db.execute(sql, [todo_id])
 
         # Update the score log
-        _update_score_log_todo(todo_id)
+        if _update_score_log_todo(todo_id):
+            return True
+        return None
 
     except Exception as e:
         print(f"Error verifying todo: {e}")
-        raise e
-    
+        return None
+
 # drop todo from database if it has not been assigned to anyone or completed.
 def drop_todo_from_database(todo_id):
     try:
@@ -137,9 +141,10 @@ def drop_todo_from_database(todo_id):
             WHERE id = ? AND assigned_to_id IS NULL AND completed = FALSE
         """
         db.execute(sql, [todo_id])
+        return True
     except Exception as e:
         print(f"Error deleting todo: {e}")
-        raise e
+        return None
 
 # Update the 'confirmed_score_log' table based on a verified todo's information.
 def _update_score_log_todo(todo_id):
@@ -158,6 +163,7 @@ def _update_score_log_todo(todo_id):
     """
     try:
         db.execute(sql, [todo_id, todo_id, todo_id])
+        return True
     except Exception as e:
         print(f"Error updating score log: {e}")
-        raise e
+        return None

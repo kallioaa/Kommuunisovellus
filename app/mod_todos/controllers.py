@@ -173,13 +173,13 @@ def assign_for_todo():
     # get user id and todo_id from the request
     todo_id = request.args.get("todo_id")
     user_id = session.get("user_id")
-    try:
-        assign_todo_to_user(todo_id, user_id)
+
+    if assign_todo_to_user(todo_id, user_id):
         flash("Todo assigned successfully!", "success")
-        return redirect(url_for("todos.main"))
-    except Exception as e:
-        flash(f"Failed to assign todo: {str(e)}", "danger")
-        return redirect(url_for("todos.main"))
+    else:
+        flash("Failed to assign todo.", "danger")
+    return redirect(url_for("todos.main"))
+
 
 # Mark a todo as completed by the assigned user.
 @mod_todos.route("/complete_todo", methods=["GET", "POST"])
@@ -189,14 +189,17 @@ def complete_todo():
     user_id = int(session.get("user_id"))
     todo_id = request.args.get("todo_id")
     assigned_to_id = int(request.args.get("assigned_to_id"))
-    if not assigned_to_id or assigned_to_id != user_id:
+    if not assigned_to_id or assigned_to_id != user_id: 
         flash("You are not assigned to this todo.", "danger")
-    try:
-        complete_todo_in_database(todo_id)
         return redirect(url_for("todos.main"))
-    except Exception as e:
-        flash(f"Failed to complete todo: {str(e)}", "danger")
+
+    if complete_todo_in_database(todo_id):
+        flash("Todo completed successfully!", "success")
         return redirect(url_for("todos.main"))
+    
+    # If there was an error completing the todo, flash an error message
+    flash("Failed to complete todo. Please try again.", "danger")
+    return redirect(url_for("todos.main"))
 
 # Verify a completed todo and update its status.
 @mod_todos.route("/verify_todo", methods=["GET", "POST"])
@@ -209,13 +212,15 @@ def verify_todo():
 
     if not todo_user_id or todo_user_id != session_user_id:
         flash("You are not authorized to verify this todo.", "danger")
-    try:
-        verify_todo_in_database(todo_id)
+        return redirect(url_for("todos.main"))
+ 
+    if verify_todo_in_database(todo_id):
         flash("Todo verified successfully!", "success")
         return redirect(url_for("todos.main"))
-    except Exception as e:
-        flash(f"Failed to verify todo: {str(e)}", "danger")
-        return redirect(url_for("todos.main"))
+
+    # If there was an error verifying the todo, flash an error message
+    flash(f"Failed to verify todo: {str(e)}", "danger")
+    return redirect(url_for("todos.main"))
 
 # Function to handle the deletion of a todo
 @mod_todos.route("/delete_todo", methods=["GET", "POST"])
@@ -226,11 +231,13 @@ def delete_todo():
     todo_id = request.args.get("todo_id")
     if not todo_id:
         flash("Todo ID is required for deletion.", "danger")
-    try:
-        # Assuming a function delete_todo_from_database exists to handle the deletion
-        drop_todo_from_database(todo_id)
+        return redirect(url_for("todos.main"))
+
+    # Assuming a function delete_todo_from_database exists to handle the deletion
+    if drop_todo_from_database(todo_id):
         flash("Todo deleted successfully!", "success")
         return redirect(url_for("todos.main"))
-    except Exception as e:
-        flash(f"Failed to delete todo: {str(e)}", "danger")
-        return redirect(url_for("todos.main"))
+
+    # If there was an error deleting the todo, flash an error message
+    flash(f"Failed to delete todo: {str(e)}", "danger")
+    return redirect(url_for("todos.main"))
