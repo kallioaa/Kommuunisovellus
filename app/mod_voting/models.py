@@ -93,7 +93,7 @@ def add_vote(event_id, user_id, vote):
     except Exception as e:
         print(f"An error occurred while adding the vote: {e}")
         return f"An error occurred while adding the vote: {e}"
-
+    
 # Get the events where the user has not voted yet
 def get_events_to_be_voted_for_user_id(user_id):
     try:
@@ -111,32 +111,16 @@ def get_events_to_be_voted_for_user_id(user_id):
     except Exception as e:
         print(f"An error occurred: {e}")
         return []
-
-# Get the events created by the user which are currently in voting
-def get_events_by_user_id_in_voting(user_id):
+    
+# Get events in voting
+def get_all_events_in_voting():
     try:
         sql = """
             SELECT DISTINCT * 
             FROM events_and_votes_master_view
-            WHERE user_id = ?
-            AND voting_ended = FALSE;
+            WHERE voting_ended = FALSE;
         """
-        result = db.query(sql, [user_id])
-        return result
-    except Exception as e:
-        print(f"An error occurred: {e}")
-        return []
-
-# Get the voting situation for events applied for the user
-def get_events_applied_for_user_id_in_voting(user_id):
-    try:
-        sql = """
-            SELECT DISTINCT * 
-            FROM events_and_votes_master_view
-            WHERE applied_for_user_id = ?
-            AND voting_ended = FALSE;
-        """
-        result = db.query(sql, [user_id])
+        result = db.query(sql)
         return result
     except Exception as e:
         print(f"An error occurred: {e}")

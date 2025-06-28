@@ -50,6 +50,11 @@
                         {% endfor %}            
                     </tbody>
                 </table>
+                <div>
+                    {% if events_to_be_voted_for_user_id %}
+                        {% include 'components/voting/voting_table.html' %}
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>

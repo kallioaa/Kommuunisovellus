@@ -5,7 +5,7 @@ Controllers for the events module, handling routes for creating and managing eve
 from flask import render_template, Blueprint, session, redirect, url_for, flash, request
 from app.mod_events.models import add_event_to_database, get_all_passed_events
 from app.mod_users.models import get_usernames_and_emails, get_user_id
-from app.mod_voting.models import add_vote
+from app.mod_voting.models import add_vote, get_all_events_in_voting
 
 mod_events = Blueprint("events", __name__, url_prefix="/events")
 
@@ -15,8 +15,9 @@ def main():
     if "user_id" not in session:
         return redirect(url_for("users.log_in"))
     all_events = get_all_passed_events()
+    all_events_in_voting = get_all_events_in_voting()
 
-    return render_template("events/main.html", all_events=all_events)
+    return render_template("events/main.html", all_events=all_events, all_events_in_voting=all_events_in_voting)
 
 # function for creating a new event
 @mod_events.route("/new_event", methods=["GET", "POST"])

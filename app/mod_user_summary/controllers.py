@@ -5,6 +5,7 @@ Defines the main blueprint and routes for the application's main page.
 from flask import render_template, Blueprint, session, redirect, url_for, request
 from app.mod_user_summary.models import get_commune_credit_scores_summary, get_total_score, get_todo_summary, get_event_summary
 from app.mod_users.models import get_usernames_and_emails
+from app.mod_voting.models import get_events_to_be_voted_for_user_id
 
 mod_user_summary = Blueprint("user_summary", __name__, url_prefix="/")
 
@@ -18,10 +19,15 @@ def main():
     user_id = request.args.get("user_id")
     username = request.args.get("username")
 
+
     if user_id is None or username is None:
         # if not provided, get from session
         user_id = session.get("user_id")
         username = session.get("username")
+
+    # change user id to int
+    user_id = int(user_id)
+        
 
     # table with credit scores summary
     commune_credit_scores_summary = get_commune_credit_scores_summary()
@@ -40,13 +46,22 @@ def main():
     # get todo summary
     todo_summary = get_todo_summary(user_id)
 
-    return render_template("user_summary/main.html", 
+    # get voting if the user is logged in
+    if user_id == int(session.get("user_id")):
+        # Get events to be voted for the user
+        events_to_be_voted_for_user_id = get_events_to_be_voted_for_user_id(user_id)
+    else:
+        # If not logged in, set to empty list
+        events_to_be_voted_for_user_id = None
+    
+    return render_template("user_summary/main.html",
                            entries_score_summary=entries_score_summary,
-                           user_id=int(user_id),
+                           user_id=user_id,
                            username=username,
                            total_score=total_score,
                            event_summary=event_summary,
-                           todo_summary=todo_summary
+                           todo_summary=todo_summary,
+                           events_to_be_voted_for_user_id=events_to_be_voted_for_user_id
     )
 
 # user search functionality
