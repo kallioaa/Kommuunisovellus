@@ -58,7 +58,6 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>ID</th>
                                 <th>Username</th>
                                 <th>Applied For Username</th>
                                 <th>Event</th>
@@ -68,13 +67,12 @@
                                 <th>Pending Votes</th>
                                 <th>True Votes</th>
                                 <th>False Votes</th>
-                                <th>Actions</th>
+                                <th>Voting</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for item in events_to_be_voted_for_user_id %}
                             <tr>
-                                <td>{{ item.event_id }}</td>
                                 <td>{{ item.username }}</td>
                                 <td>{{ item.applied_for_username }}</td>
                                 <td>{{ item.event }}</td>
@@ -85,15 +83,17 @@
                                 <td>{{ item.true_votes }}</td>
                                 <td>{{ item.false_votes }}</td>
                                 <td>
-                                    <form method="POST" action="{{ url_for('voting.vote_event', event_id=item.event_id, vote='true') }}"
-                                        style="display:inline;">
-                                        <button type="submit">Approve</button>
-                                    </form>
-                                    <form method="POST"
-                                        action="{{ url_for('voting.vote_event', event_id=item.event_id, vote='false') }}"
-                                        style="display:inline;">
-                                        <button type="submit">Disapprove</button>
-                                    </form>
+                                    <div class="voting-buttons">
+                                        <form method="POST" action="{{ url_for('voting.vote_event', event_id=item.event_id, vote='true') }}"
+                                            style="display:inline;">
+                                            <button type="submit">Approve</button>
+                                        </form>
+                                        <form method="POST"
+                                            action="{{ url_for('voting.vote_event', event_id=item.event_id, vote='false') }}"
+                                            style="display:inline;">
+                                            <button type="submit">Disapprove</button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                             {% endfor %}

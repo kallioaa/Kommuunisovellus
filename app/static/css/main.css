@@ -84,6 +84,11 @@ select:focus {
     box-shadow: 0 0 0 3px rgba(201, 0, 217, 0.3);
 }
 
+.voting-buttons {
+    display: flex;
+    grid-area: 10px
+}
+
 .button-link {
     font: inherit;
     padding: 0.75rem 1rem;
