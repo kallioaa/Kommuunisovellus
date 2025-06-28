@@ -6,57 +6,105 @@
 {% include 'components/_navbar.html' %}
 {% include 'components/_alerts.html' %}
 
+
 <div>
     <div>
-        <div>
-            <div>
-                <h3>Summary for {{username}}</h3>
-                <h4>Total Credit Score: {{ total_score }}</h4>
-            </div>
-            <div class="summary-wrapper">
-                <div class="container">
-                    <h4>Events Summary for {{username}}</h4>
-                    <p>Total Events Created: {{ event_summary.events_created_by_user }}</p>
-                    <p>Passed Events for user: {{ event_summary.confirmed_events_assigned_to_user }}</p>
-                    <p>Total Events Score: {{ event_summary.total_confirmed_event_score }}</p>
-                </div>
-                <div class="container">
-                    <h4>Todos Summary for {{username}}</h4>
-                    <p>Total Todos Created: {{ todo_summary.todos_created_by_user }}</p>
-                    <p>Total Todos Completed: {{ todo_summary.completed_todos_assigned_to_user }}</p>
-                    <p>Total Todo Score: {{ todo_summary.total_confirmed_todo_score }}</p>
-                    </div>
-            </div>
-            <div>
-                <h4>Commune Credit Scores Table</h4>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Username</th>
-                            <th>Total Score</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for entry in entries_score_summary %}
-                        <tr>
-                            {% if entry.user_id == user_id %}
-                                <td><strong>{{ entry.username }}</strong></td>
-                                <td><strong>{{ entry.score }}</strong></td>
-                            {% else %}
-                                <td>{{ entry.username }}</td>
-                                <td>{{ entry.score }}</td>
-                            {% endif %}
-                        </tr>
-                        {% endfor %}            
-                    </tbody>
-                </table>
-                <div>
-                    {% if events_to_be_voted_for_user_id %}
-                        {% include 'components/voting/voting_table.html' %}
-                    {% endif %}
-                </div>
-            </div>
+        <h3>Summary for {{username}}</h3>
+        <h4>Total Credit Score: {{ total_score }}</h4>
+    </div>
+    <div class="summary-wrapper">
+        <div class="container">
+            <h4>Events Summary for {{username}}</h4>
+            <p>Total Events Created: {{ event_summary.events_created_by_user }}</p>
+            <p>Passed Events for user: {{ event_summary.confirmed_events_assigned_to_user }}</p>
+            <p>Total Events Score: {{ event_summary.total_confirmed_event_score }}</p>
         </div>
+        <div class="container">
+            <h4>Todos Summary for {{username}}</h4>
+            <p>Total Todos Created: {{ todo_summary.todos_created_by_user }}</p>
+            <p>Total Todos Completed: {{ todo_summary.completed_todos_assigned_to_user }}</p>
+            <p>Total Todo Score: {{ todo_summary.total_confirmed_todo_score }}</p>
+            </div>
+    </div>
+    <div>
+        <h3>Commune Credit Scores Table</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Total Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in entries_score_summary %}
+                <tr>
+                    {% if entry.user_id == user_id %}
+                        <td><strong>{{ entry.username }}</strong></td>
+                        <td><strong>{{ entry.score }}</strong></td>
+                    {% else %}
+                        <td>{{ entry.username }}</td>
+                        <td>{{ entry.score }}</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}            
+            </tbody>
+        </table>
+    </div>
+    <div>
+        {% if events_to_be_voted_for_user_id and events_to_be_voted_for_user_id|length > 0%}
+            <div>
+                <h3> Cast your vote! </h3>
+                <div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Applied For Username</th>
+                                <th>Event</th>
+                                <th>Description</th>
+                                <th>Event Score</th>
+                                <th>Event Date</th>
+                                <th>Pending Votes</th>
+                                <th>True Votes</th>
+                                <th>False Votes</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in events_to_be_voted_for_user_id %}
+                            <tr>
+                                <td>{{ item.event_id }}</td>
+                                <td>{{ item.username }}</td>
+                                <td>{{ item.applied_for_username }}</td>
+                                <td>{{ item.event }}</td>
+                                <td>{{ item.description }}</td>
+                                <td>{{ item.event_score }}</td>
+                                <td>{{ item.event_date }}</td>
+                                <td>{{ item.pending_votes }}</td>
+                                <td>{{ item.true_votes }}</td>
+                                <td>{{ item.false_votes }}</td>
+                                <td>
+                                    <form method="POST" action="{{ url_for('voting.vote_event', event_id=item.event_id, vote='true') }}"
+                                        style="display:inline;">
+                                        <button type="submit">Approve</button>
+                                    </form>
+                                    <form method="POST"
+                                        action="{{ url_for('voting.vote_event', event_id=item.event_id, vote='false') }}"
+                                        style="display:inline;">
+                                        <button type="submit">Disapprove</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+        {% else %}
+            <div>
+                <p>No events to be voted on at the moment. Check back later!</p>
+            </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
