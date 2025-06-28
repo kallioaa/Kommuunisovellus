@@ -9,11 +9,11 @@ INSERT INTO users (username, password, email) VALUES
 
 -- Insert example events
 INSERT INTO events (id, user_id, applied_for_id, event, description, event_score, event_date, voting_ended, passed) VALUES
-(1, 1, 2, 'Yhteisön siivouspäivä', 'Yhteisön järjestämä siivouspäivä', -85, '2023-11-01', FALSE, FALSE),
-(2, 3, 4, 'Kirjakerhon tapaaminen', 'Kirjakerhon kuukausittainen tapaaminen', 90, '2023-11-05', FALSE, TRUE),
-(3, 5, 1, 'Joogatunti', 'Rentouttava joogatunti kaikille', -75, '2023-11-10', FALSE, FALSE),
-(4, 2, 3, 'Ruoanlaittokurssi', 'Opetellaan uusia reseptejä yhdessä', 80, '2023-11-15', FALSE, TRUE),
-(5, 4, 5, 'Teknologiaesitelmä', 'Esitelmä uusimmista teknologioista', -95, '2023-11-20', FALSE, FALSE);
+(1, 1, 2, 'Ei vetänyt vessaa', 'Taaskaan...', -85, '2023-11-01', FALSE, FALSE),
+(2, 3, 4, 'Järjesti Kirjakerhon tapaamisen', 'Kirjakerhon kuukausittainen tapaaminen', 90, '2023-11-05', FALSE, TRUE),
+(3, 5, 1, 'Ei tiskannut kattilaa', 'siivotonta...', -75, '2023-11-10', FALSE, FALSE),
+(4, 2, 3, 'Ulkoilutti koiran', 'Lenkki Julosaaren ympäristössä', 80, '2023-11-15', FALSE, TRUE),
+(5, 4, 5, 'Rikkoi television', 'tiputti telkkarin seinältä. Kustannukset suuret', -95, '2023-11-20', FALSE, FALSE);
 
 -- Insert example todos
 INSERT INTO todos (user_id, assigned_to_id, todo, description, todo_score, due_date, completed, verified) VALUES
