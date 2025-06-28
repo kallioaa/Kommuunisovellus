@@ -51,12 +51,12 @@ def _check_voting_completion(event_id):
             db.execute(sql_update_not_passed, [event_id])
             voting_passed = False
 
+        return voting_passed
+
     except Exception as e:
         print(f"Error checking voting completion: {e}")
-        raise e
+        return None
 
-    # Return whether voting has completed
-    return voting_passed
 
 def _update_score_log_events(event_id):
     sql = """
@@ -71,8 +71,10 @@ def _update_score_log_events(event_id):
     """
     try:
         db.execute(sql, [event_id, event_id])
+        return True
     except Exception as e:
-        print(e)
+        print(f"Error updating score log events: {e}")
+        return None
 
 # Add or update a user's vote for an event.
 def add_vote(event_id, user_id, vote):
@@ -84,15 +86,17 @@ def add_vote(event_id, user_id, vote):
     """
     try:
         db.execute(sql, [event_id, user_id, vote])
+
+        # Check if voting is completed after adding the vote
         voting_completed = _check_voting_completion(event_id)
-        if voting_completed is None:
-            raise RuntimeError("Voting completion check failed.")
+
         if voting_completed:
             _update_score_log_events(event_id)
-        return "Vote successfully added or updated."
+
+        return True
     except Exception as e:
         print(f"An error occurred while adding the vote: {e}")
-        return f"An error occurred while adding the vote: {e}"
+        return None
     
 # Get the events where the user has not voted yet
 def get_events_to_be_voted_for_user_id(user_id):

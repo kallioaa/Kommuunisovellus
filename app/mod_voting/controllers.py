@@ -36,12 +36,13 @@ def vote_event():
     # Get the current user's ID from the session
     user_id = session.get("user_id")
 
-    try:
-        # Use the add_vote function to record the vote (True = approve, False = disapprove)
-        add_vote(event_id=event_id, user_id=user_id, vote=vote_bool)
-        flash("Vote recorded successfully!", "success")
+    # add the vote
+    success = add_vote(event_id=event_id, user_id=user_id, vote=vote_bool)
+
+    if not success:
+        flash("Failed to record vote. Please try again.", "danger")
         return redirect(url_for("user_summary.main"))
-    except Exception as e:
-        # Handle unexpected errors
-        flash("Vote recording failed. Please try again.", "danger")
-        return redirect(url_for("user_summary.main"))
+    
+    # If the vote was successfully recorded, redirect to the user summary page
+    flash("Vote recorded successfully!", "success")
+    return redirect(url_for("user_summary.main"))
