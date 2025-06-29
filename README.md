@@ -10,8 +10,9 @@ Sovelluksen tarkoituksena on luoda leikkimielinen pistesysteemi kanssa-asujien k
 Tarkempi selostus toiminallisuudesta:
 - Käyttäjä voi kirjautua sovellukseen
 - Käyttäjä näkee muiden sekä omat pisteet
+- Käyttäjä voi hakea muistas käyttäjiä ja nähdä niiden tilstoja
 - Käyttäjä voi luoda tapahtuman "Eventin" itselle tai toiselle.
-- Käyttäjä näkyy kaikki äänestyksen läpäisseet tapahtumat, ja voi hakea niistä
+- Käyttäjä näkyy kaikki äänestyksen läpäisseet tapahtumat
 - Käyttäjä voin äänestää kyllä tai ei muiden luomiin tapahtumiin
 - Käyttäjä voi tarkastella ja hakea "Todos" askareita
 - Käyttäjä voi ilmoittautua askareen tekijäksi
