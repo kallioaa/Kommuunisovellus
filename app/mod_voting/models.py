@@ -4,7 +4,7 @@ Defines models and database interaction logic for the voting module.
 
 import app.db as db
 
-def _check_voting_completion(event_id):
+def _check_voting_passed(event_id):
     # Initialize variables
     total_users = 0
     true_votes = 0
@@ -41,7 +41,7 @@ def _check_voting_completion(event_id):
             db.execute(sql_update_passed, [event_id])
             voting_passed = True
 
-        elif false_votes >= (total_users / 2):
+        elif false_votes > (total_users / 2):
             # Voting can end, mark as not passed
             sql_update_not_passed = """
             UPDATE events
@@ -88,9 +88,9 @@ def add_vote(event_id, user_id, vote):
         db.execute(sql, [event_id, user_id, vote])
 
         # Check if voting is completed after adding the vote
-        voting_completed = _check_voting_completion(event_id)
+        voting_passed = _check_voting_passed(event_id)
 
-        if voting_completed:
+        if voting_passed:
             _update_score_log_events(event_id)
 
         return True
