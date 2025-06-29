@@ -54,7 +54,7 @@
                         <form method="POST"
                             action="{{ url_for('todos.assign_for_todo', todo_id=item.todo_id) }}"
                             style="display:inline;">
-                            <button type="submit" class="btn btn-success">Apply for todo</button>
+                            <button type="submit">Apply for todo</button>
                         </form>
                         {% endif %}
                     </td>
@@ -65,7 +65,7 @@
                         <form method="POST"
                             action="{{ url_for('todos.complete_todo', todo_id=item.todo_id, assigned_to_id=item.assigned_to_id) }}"
                             style="display:inline;">
-                            <button type="submit" class="btn btn-warning">Mark as Complete</button>
+                            <button type="submit">Mark as Complete</button>
                         </form>
                         {% else %}
                         {{ 'Yes' if item.completed else 'No' }}
@@ -76,7 +76,7 @@
                         <form method="POST"
                             action="{{ url_for('todos.verify_todo', todo_id=item.todo_id, user_id=item.user_id) }}"
                             style="display:inline;">
-                            <button type="submit" class="btn btn-info">Verify</button>
+                            <button type="submit">Verify</button>
                         </form>
                         {% else %}
                         {{ 'Yes' if item.verified else 'No' }}
@@ -86,15 +86,15 @@
                         {% if item.user_id == user_id and not item.assigned_to_username%}
                         <div>
                             <form method="POST" action="{{ url_for('todos.delete_todo', todo_id=item.todo_id) }}" style="display:inline;">
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <button type="submit">Delete</button>
                             </form>
-                            <a href="{{ url_for('todos.update_todo', todo_id=item.todo_id) }}" class="button-link"
+                            <a href="{{ url_for('todos.update_todo', todo_id=item.todo_id) }}"
                                 style="display: inline">Update</a>
 
                         </div>
                         {% else %}
                         <div>
-                            <a href="{{ url_for('todos.view_todo', todo_id=item.todo_id) }}" class="button-link"
+                            <a href="{{ url_for('todos.view_todo', todo_id=item.todo_id) }}"
                             style="display: inline">View</a>
                         </div>
                         {% endif %}

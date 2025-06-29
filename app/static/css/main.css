@@ -9,9 +9,7 @@ body {
     font-size: 16px;
     line-height: 1.7;
     color: #c900d9;
-    /* Vivid pink-purple */
     background: #fff;
-    /* Pure white background */
     padding: 2rem;
     min-height: 100vh;
 }
@@ -24,20 +22,17 @@ h4{
     margin-top: 0.75rem;
     margin-bottom: 0.75rem;
     color: #e000ff;
-    /* Bright pink-purple */
     letter-spacing: 0.05em;
 }
 
 a {
     color: #b400c7;
-    /* Deep purple */
     text-decoration: none;
     font-weight: 600;
 }
 
 a:hover {
     color: #ff4dfb;
-    /* Neon pink */
     text-shadow: 0 0 5px #ffb7f8;
 }
 
@@ -46,7 +41,6 @@ a:hover {
     margin: 1rem;
     background-color: rgb(255, 255, 255);
     border-color: rgb(255, 255, 255);
-    /* subtle pale pink-purple overlay */
     border-radius: 16px;
     backdrop-filter: blur(8px);
     box-shadow: 0 0 20px rgba(201, 0, 217, 0.15);
@@ -70,12 +64,9 @@ button {
     margin-bottom: 1.25rem;
     width: 100%;
     border: 1px solid #c900d9;
-    /* Pink-purple border */
     border-radius: 8px;
     background-color: #fff;
-    /* White background */
     color: #c900d9;
-    /* Pink-purple text */
 }
 
 input:focus,
@@ -96,12 +87,9 @@ select:focus {
     margin-top: 0.5rem;
     margin-bottom: 1.25rem;
     border: 1px solid #c900d9;
-    /* Pink-purple border */
     border-radius: 8px;
     background-color: #fff;
-    /* White background */
     color: #c900d9;
-    /* Pink-purple text */;
 }
 
 .button-link:hover {
@@ -152,10 +140,7 @@ tbody td {
     padding: 1rem 2rem;
     font-size: 1.25rem;
     background: #fff;
-    /* White background */
     color: #c900d9;
-    /* Pink-purple text */
-    backdrop-filter: blur(12px);
     border-bottom: 2px solid rgba(201, 0, 217, 0.4);
     box-shadow: 0 8px 20px rgba(201, 0, 217, 0.3);
     border-radius: 0 0 16px 16px;
