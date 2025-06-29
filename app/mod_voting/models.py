@@ -64,7 +64,7 @@ def _check_voting_passed(event_id):
                 """
                 db.execute(sql_update_passed, [event_id])
                 voting_passed = True
-            elif false_votes > true_votes:
+            else:
                 sql_update_not_passed = """
                 UPDATE events
                 SET voting_ended = TRUE, passed = FALSE
