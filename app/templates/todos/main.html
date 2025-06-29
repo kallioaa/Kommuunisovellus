@@ -89,13 +89,13 @@
                                 <button type="submit">Delete</button>
                             </form>
                             <a href="{{ url_for('todos.update_todo', todo_id=item.todo_id) }}"
-                                style="display: inline">Update</a>
+                                style="display: inline" class="button-link">Update</a>
 
                         </div>
                         {% else %}
                         <div>
                             <a href="{{ url_for('todos.view_todo', todo_id=item.todo_id) }}"
-                            style="display: inline">View</a>
+                            style="display: inline" class="button-link">View</a>
                         </div>
                         {% endif %}
                         </td>
