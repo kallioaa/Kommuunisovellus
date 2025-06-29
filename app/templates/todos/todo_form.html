@@ -18,20 +18,20 @@
 
         <div>
             <label for="todo">Todo Title:</label><br>
-            <input type="text" id="todo" name="todo" required placeholder="Enter todo title"
-                value="{{ todo_entry.todo if todo_entry }}" {% if mode=='view' %}readonly{% endif %}>
+            <input type="text" id="todo" name="todo" required placeholder="Enter todo title (max 40 characters)"
+                value="{{ todo_entry.todo if todo_entry }}" {% if mode=='view' %}readonly{% endif %} maxlength="40">
         </div>
 
         <div>
             <label for="description">Description:</label><br>
-            <textarea id="description" name="description" placeholder="Enter description (optional)" rows="4" cols="50"
-                {% if mode=='view' %}readonly{% endif %}>{{ todo_entry.description if todo_entry }}</textarea>
+            <textarea id="description" name="description" placeholder="Enter description (optional max 200 characters)" rows="4" cols="50"
+                {% if mode=='view' %}readonly{% endif %} maxlength="200">{{ todo_entry.description if todo_entry }}</textarea>
         </div>
 
         <div>
             <label for="todo_score">Todo Score:</label><br>
-            <input type="number" id="todo_score" name="todo_score" required placeholder="Enter score"
-                value="{{ todo_entry.todo_score if todo_entry }}" {% if mode=='view' %}readonly{% endif %}>
+            <input type="number" id="todo_score" name="todo_score" required placeholder="Enter score (max 1000)"
+                value="{{ todo_entry.todo_score if todo_entry }}" {% if mode=='view' %}readonly{% endif %} max=1000>
         </div>
         <label for="due_date">Due Date:</label><br>
         <input type="date" id="due_date" name="due_date" required value="{{ todo_entry.due_date if todo_entry }}" {% if

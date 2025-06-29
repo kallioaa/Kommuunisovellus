@@ -29,21 +29,21 @@
 
     <div>
         <label for="event">Event Title:</label><br>
-        <input type="text" id="event" name="event" placeholder="Enter event title"
+        <input type="text" id="event" name="event" placeholder="Enter event title (max 40 characters)"
+            maxlength="40"
             value="{{ event_entry.event if event_entry }}" {% if mode=='view' %}readonly{% else %}required{% endif %}>
     </div>
 
     <div>
         <label for="description">Description:</label><br>
-        <textarea id="description" name="description" placeholder="Optional description" rows="4" cols="50" {% if
-            mode=='view' %}readonly{% endif %}>{{ event_entry.description if event_entry }}</textarea>
+        <textarea id="description" name="description" placeholder="Optional description (max 200 characters)" rows="4" cols="50" {% if
+            mode=='view' %}readonly{% endif %} maxlength="200">{{ event_entry.description if event_entry }}</textarea>
     </div>
 
     <div>
         <label for="event_score">Event Score:</label><br>
-        <input type="number" id="event_score" name="event_score" placeholder="Enter score"
-            value="{{ event_entry.event_score if event_entry }}" {% if mode=='view' %}readonly{% else %}required{% endif
-            %}>
+        <input type="number" id="event_score" name="event_score" placeholder="Enter score (max 1000)"
+            value="{{ event_entry.event_score if event_entry }}" {% if mode=='view' %}readonly{% else %}required{% endif %} max=1000>
     </div>
 
     <div>
