@@ -58,10 +58,10 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Username</th>
-                                <th>Applied For Username</th>
                                 <th>Event</th>
                                 <th>Description</th>
+                                <th>Username</th>
+                                <th>Applied For Username</th>
                                 <th>Event Score</th>
                                 <th>Event Date</th>
                                 <th>Pending Votes</th>
@@ -73,10 +73,10 @@
                         <tbody>
                             {% for item in events_to_be_voted_for_user_id %}
                             <tr>
-                                <td>{{ item.username }}</td>
-                                <td>{{ item.applied_for_username }}</td>
                                 <td>{{ item.event }}</td>
                                 <td>{{ item.description }}</td>
+                                <td>{{ item.username }}</td>
+                                <td>{{ item.applied_for_username }}</td>
                                 <td>{{ item.event_score }}</td>
                                 <td>{{ item.event_date }}</td>
                                 <td>{{ item.pending_votes }}</td>

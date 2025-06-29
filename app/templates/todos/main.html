@@ -28,10 +28,10 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Created by</th>
-                    <th scope="col">Assigned to</th>
                     <th scope="col">Todo</th>
                     <th scope="col">Description</th>
+                    <th scope="col">Created by</th>
+                    <th scope="col">Assigned to</th>
                     <th scope="col">Score</th>
                     <th scope="col">Due Date</th>
                     <th scope="col">Completed</th>
@@ -42,6 +42,8 @@
             <tbody>
                 {% for item in todos %}
                 <tr>
+                    <td>{{ item.todo }}</td>
+                    <td>{{ item.description }}</td>
                     <td>{{ item.username }}</td>
                     <td>
                         {% if item.assigned_to_id or item.user_id == user_id %}
@@ -56,8 +58,6 @@
                         </form>
                         {% endif %}
                     </td>
-                    <td>{{ item.todo }}</td>
-                    <td>{{ item.description }}</td>
                     <td>{{ item.todo_score }}</td>
                     <td>{{ item.due_date }}</td>
                     <td>
