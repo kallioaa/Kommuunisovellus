@@ -58,7 +58,7 @@ The Commune App is all about creating a communal environment where members can p
 
 ## Setup
 
-# Setup Instructions (English)
+# Setup Instructions
 
 1. **Clone this repository** to your local machine and navigate to its root directory.**
 
