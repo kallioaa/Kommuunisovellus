@@ -5,6 +5,11 @@ INSERT INTO users (username, password, email) VALUES
 ('Pekka', 'pbkdf2_sha256$260000$randomsalt3$hashedpassword3', 'pekka@example.com'),
 ('Sanna', 'pbkdf2_sha256$260000$randomsalt4$hashedpassword4', 'sanna@example.com'),
 ('Jukka', 'pbkdf2_sha256$260000$randomsalt5$hashedpassword5', 'jukka@example.com'),
+('Anna', 'pbkdf2_sha256$260000$randomsalt6$hashedpassword6', 'anna@example.com'),
+('Kalle', 'pbkdf2_sha256$260000$randomsalt7$hashedpassword7', 'kalle@example.com'),
+('Emilia', 'pbkdf2_sha256$260000$randomsalt8$hashedpassword8', 'emilia@example.com'),
+('Ville', 'pbkdf2_sha256$260000$randomsalt9$hashedpassword9', 'ville@example.com'),
+('Noora', 'pbkdf2_sha256$260000$randomsalt10$hashedpassword10', 'noora@example.com'),
 ('Testaaja', 'scrypt:32768:8:1$xenzQUmicAZvOTmC$5e71784d9dce867a817b7fb2992d394662191bdbcb71f5a3d2e550259555be8064dd9da19ef1f763bd79049d8f602403d9a5010a22ff1291e34877a7052d5454', 'testaaja@gmail.com');
 
 -- Insert example events
