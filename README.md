@@ -58,7 +58,7 @@ The Commune App is all about creating a communal environment where members can p
 
 ## Setup
 
-# Setup Instructions (English)
+# Setup Instructions
 
 1. **Clone this repository** to your local machine and navigate to its root directory.**
 
@@ -110,13 +110,15 @@ Only logged-in users can access the Commune App’s features such as viewing sco
 
 ---
 
-## Score Table
+## User summary
 
-Once logged in, you’ll land on the [**Home**](http://127.0.0.1:8000/) page. Here, you’ll see a **table** displaying the accumulated scores for different accounts in the system. This table gives you an at-a-glance perspective of each user’s current standing based on events and todos.
+Once logged in, you’ll land on the [**Home**](http://127.0.0.1:8000/) page. Here you will see summary information about the logged in user. You can also go and see the summary of another user through user search functionality which can be found in the navigation bar.
+
+When you are looking into your own summary, at the bottom of the page you will find events that you can vote on. 
 
 ---
 
-## Events and Voting
+## Events
 
 ### Creating an Event
 1. Navigate to the [**Events**](http://127.0.0.1:8000/events/) section.
@@ -128,14 +130,6 @@ Once logged in, you’ll land on the [**Home**](http://127.0.0.1:8000/) page. He
 4. Submit the event.
 
 **Note**: Once you create an event, an automatic **pass vote** (in favor) from you is recorded.
-
-### Voting on an Event
-1. All non passed events will be listed in the [**Voting**](http://127.0.0.1:8000/voting/) section.
-2. Click on an event to see details.
-3. Vote **Approve** (in favor) or **Disapprove** (against).
-4. The app calculates the majority vote:
-   - If half or more of the users **Approve**, the proposed score change is awarded.
-   - Else **Disapprove**, no score change is made.
 
 ### Score Application
 - When an event is **passed**, the recipient(s) automatically get the specified score adjustment (positive or negative).
@@ -164,5 +158,8 @@ The Commune App also includes a **Todo** feature where users can create tasks, a
 - When the **creator** verifies that the todo has been completed:
   - The **negative score** is added to the account that created the todo (as some cost or accountability for creating tasks).
   - The **positive score** is awarded to the user who completed it.
+ 
+### Updating and deleting a todo
+- When you are the creator of the todo, an there is no one assigned to it yet, you will have the option to delete it or update it. Theses operations are not possible after so they can't me misused. 
 
 This ensures fairness, where creating a todo has a cost (negative score for the creator), but it’s offset by the benefit the assigned user gets upon completion (positive score).
