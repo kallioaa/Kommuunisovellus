@@ -84,7 +84,7 @@
             </thead>
             <tbody>
                 {% for item in all_events_in_voting %}
-                <tr {% if item.user_id == user_id or item.applied_for_user_id == user_id %}class="bold-row"{% endif %}>
+                <tr>
                     <td>{{ item.event }}</td>
                     <td>{{ item.description }}</td>
                     <td>{{ item.username }}</td>
