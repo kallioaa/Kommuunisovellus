@@ -27,13 +27,15 @@ INSERT INTO todos (user_id, assigned_to_id, todo, description, todo_score, due_d
 INSERT INTO votes (event_id, user_id, vote) VALUES
 (1, 2, TRUE),
 (1, 3, TRUE),
+(1, 5, TRUE),
 (1, 4, FALSE),
 (3, 2, TRUE),
 (3, 4, TRUE),
 (4, 1, TRUE),
 (4, 5, TRUE),
-(5, 1, TRUE),
-(5, 2, FALSE);
+(5, 1, FALSE),
+(5, 2, FALSE),
+(5, 3, FALSE);
 
 -- insert example confirmed scores
 INSERT INTO confirmed_score_log (user_id, event_id, todo_id, score) VALUES
