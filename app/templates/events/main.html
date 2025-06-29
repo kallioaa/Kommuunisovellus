@@ -28,75 +28,89 @@
 <div>
     <h2>Passed events</h2>
     {% if all_events and all_events|length > 0 %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Username</th>
+                <th scope="col">Applied For Username</th>
+                <th scope="col">Event</th>
+                <th scope="col">Description</th>
+                <th scope="col">Event Score</th>
+                <th scope="col">Event Date</th>
+                <th scope="col">Action</th> {# New column #}
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in all_events %}
+            <tr>
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{ item.username }}</td>
+                <td>{{ item.applied_for_username }}</td>
+                <td>{{ item.event }}</td>
+                <td>{{ item.description }}</td>
+                <td>{{ item.event_score }}</td>
+                <td>{{ item.event_date }}</td>
+                <td>
+                    <a class="button-link" href="{{ url_for('events.view_event', event_id=item.event_id) }}">
+                        View
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No passed events found.</p>
+    {% endif %}
+</div>
+
+<div>
+    <h2>All events in voting</h2>
+    {% if all_events_in_voting and all_events_in_voting|length > 0 %}
+    <div>
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Applied For Username</th>
-                    <th scope="col">Event</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Event Score</th>
-                    <th scope="col">Event Date</th>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Applied For Username</th>
+                    <th>Event</th>
+                    <th>Description</th>
+                    <th>Event Score</th>
+                    <th>Event Date</th>
+                    <th>Pending Votes</th>
+                    <th>True Votes</th>
+                    <th>False Votes</th>
+                    <th>Action</th> {# New column #}
                 </tr>
             </thead>
             <tbody>
-                {% for item in all_events %}
+                {% for item in all_events_in_voting %}
                 <tr>
-                    <th scope="row">{{ loop.index }}</th>
+                    <td>{{ item.event_id }}</td>
                     <td>{{ item.username }}</td>
                     <td>{{ item.applied_for_username }}</td>
                     <td>{{ item.event }}</td>
                     <td>{{ item.description }}</td>
                     <td>{{ item.event_score }}</td>
                     <td>{{ item.event_date }}</td>
+                    <td>{{ item.pending_votes }}</td>
+                    <td>{{ item.true_votes }}</td>
+                    <td>{{ item.false_votes }}</td>
+                    <td>
+                        <a class="button-link" href="{{ url_for('events.view_event', event_id=item.event_id) }}">
+                            View
+                        </a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-        {% else %}
-            <p>No passed events found.</p>
-        {% endif %}
-    <div>
-        <h2>All events in voting</h2>
-        {% if all_events_in_voting and all_events_in_voting|length > 0 %}
-        <div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Username</th>
-                        <th>Applied For Username</th>
-                        <th>Event</th>
-                        <th>Description</th>
-                        <th>Event Score</th>
-                        <th>Event Date</th>
-                        <th>Pending Votes</th>
-                        <th>True Votes</th>
-                        <th>False Votes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for item in all_events_in_voting %}
-                    <tr>
-                        <td>{{ item.event_id }}</td>
-                        <td>{{ item.username }}</td>
-                        <td>{{ item.applied_for_username }}</td>
-                        <td>{{ item.event }}</td>
-                        <td>{{ item.description }}</td>
-                        <td>{{ item.event_score }}</td>
-                        <td>{{ item.event_date }}</td>
-                        <td>{{ item.pending_votes }}</td>
-                        <td>{{ item.true_votes }}</td>
-                        <td>{{ item.false_votes }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        {% else %}
-        <p>No ongoing voting events found.</p>
-        {% endif %}
     </div>
+    {% else %}
+    <p>No ongoing voting events found.</p>
+    {% endif %}
 </div>
+
 {% endblock %}

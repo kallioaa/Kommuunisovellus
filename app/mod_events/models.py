@@ -28,6 +28,33 @@ def add_event_to_database(event_data):
     except Exception as e:
         print(f"Error inserting event: {e}")
         return None
+    
+# Function to retrieve an event by its ID
+def get_event_by_id(event_id):
+    try:
+        sql = """
+            SELECT 
+                e.id AS event_id,
+                e.user_id AS user_id,
+                u.username AS username, 
+                a.username AS applied_for_username, 
+                e.event, 
+                e.description, 
+                e.event_score, 
+                e.event_date
+            FROM events e
+            JOIN users u ON e.user_id = u.id
+            LEFT JOIN users a ON e.applied_for_id = a.id
+            WHERE e.id = ?
+        """
+        rows = db.query(sql, [event_id])
+        if rows:
+            return dict(rows[0])  # Convert sqlite3.Row to dict
+        return None
+
+    except Exception as e:
+        print(f"Error retrieving event by ID: {e}")
+        return None
 
 # Function to retrieve all passed events
 def get_all_passed_events():

@@ -41,7 +41,7 @@ def new_todo():
     
     if request.method == "GET":
 
-        return render_template("todos/new_todo.html")
+        return render_template("todos/todo_form.html", mode="new")
     
     if request.method == "POST":
         # check csrf token
@@ -60,8 +60,8 @@ def new_todo():
 
         if not todo or not description or not todo_score or not due_date:
             flash("Some required fields are not filled.", "danger")
-            return render_template("todos/new_todo.html", todo_entry=form)
-        
+            return render_template("todos/todo_form.html", todo_entry=form, mode="new")
+
         if add_todo_to_database(
             user_id=user_id,
             todo=todo,
@@ -73,8 +73,8 @@ def new_todo():
             return redirect(url_for("todos.main"))
         else:
             flash("Problem when creating a new todo.", "danger")
-            return render_template("todos/new_todo.html", todo_entry=form)
-        
+            return render_template("todos/todo_form.html", todo_entry=form, mode="new")
+
 
 # update an existing todo
 @mod_todos.route("/update_todo", methods=["GET", "POST"])
@@ -116,8 +116,8 @@ def update_todo():
         if not _update_authorized():
             flash("You are not authorized to update this todo.", "danger")
             return redirect(url_for("todos.main"))
-        
-        return render_template("todos/update_todo.html", todo_entry=todo_entry)
+
+        return render_template("todos/todo_form.html", todo_entry=todo_entry, mode="update")
 
     if request.method == "POST":
         # check csrf token
@@ -147,8 +147,8 @@ def update_todo():
         
         if not todo or not description or not todo_score or not due_date:
             flash("Some required fields are not filled.", "danger")
-            return render_template("todos/update_todo.html", todo_entry=todo_entry)
-        
+            return render_template("todos/todo_form.html", todo_entry=todo_entry, mode="update")
+
         if modify_todo_in_database(
             todo_id=todo_id,
             todo=todo,
@@ -160,8 +160,26 @@ def update_todo():
             return redirect(url_for("todos.main"))
         else:
             flash("Problem when updating the todo.", "danger")
-            return render_template("todos/update_todo.html", todo_entry=todo_entry)
-        
+            return render_template("todos/todo_form.html", todo_entry=todo_entry, mode="update")
+
+# view a todo by its ID
+@mod_todos.route("/view_todo", methods=["GET"])
+def view_todo():
+    if "user_id" not in session:
+        return redirect(url_for("users.log_in"))
+    
+    todo_id = request.args.get("todo_id")
+    if not todo_id:
+        flash("Todo ID is required for viewing.", "danger")
+        return redirect(url_for("todos.main"))
+
+    # get todo by id
+    todo_entry = get_todo_by_id(todo_id)
+    if not todo_entry:
+        flash("Todo not found.", "danger")
+        return redirect(url_for("todos.main"))
+
+    return render_template("todos/todo_form.html", todo_entry=todo_entry, mode="view")
 
 # Assign the current user to a todo.
 @mod_todos.route("/assign_for_todo", methods=["GET", "POST"])
