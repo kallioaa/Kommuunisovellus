@@ -30,8 +30,11 @@ def _check_voting_passed(event_id):
         """
         false_votes = db.query(sql_false_votes, [event_id])[0][0]
 
+        # total votes cast
+        votes_cast = true_votes + false_votes
+
         # Check if enough votes have been cast to determine the majority
-        if true_votes >= (total_users / 2):
+        if true_votes > (total_users / 2):
             # Voting can end, mark as passed
             sql_update_passed = """
             UPDATE events
@@ -50,6 +53,26 @@ def _check_voting_passed(event_id):
             """
             db.execute(sql_update_not_passed, [event_id])
             voting_passed = False
+
+        elif votes_cast == total_users:
+            # If all users have voted, we can also determine the outcome
+            if true_votes > false_votes:
+                sql_update_passed = """
+                UPDATE events
+                SET voting_ended = TRUE, passed = TRUE
+                WHERE id = ?
+                """
+                db.execute(sql_update_passed, [event_id])
+                voting_passed = True
+            elif false_votes > true_votes:
+                sql_update_not_passed = """
+                UPDATE events
+                SET voting_ended = TRUE, passed = FALSE
+                WHERE id = ?
+                """
+                db.execute(sql_update_not_passed, [event_id])
+                voting_passed = False
+
 
         return voting_passed
 
