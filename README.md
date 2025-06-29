@@ -35,6 +35,26 @@ Tarkempi selostus toiminallisuudesta:
 - CSS parantelua seuraavaksi
 - Ilmoitusten parantamista sovelluksessa
 
+## Lopullinen palautus
+
+- Sovelluksesta puuttuu käyttäjäsivut, joilla näytettäisiin tilastoja ja käyttäjän lisäämät tietokohteet. -> Aloitussivu
+- Sovelluksesta puuttuu hakutoiminnallisuus. -> Käyttäjähaku lisätty
+- Sovelluksessa ei voi muokata tietokohteita, vaikka se on pakollinen vaatimus. -> Listtäy TODO:ille
+- Sovelluksesta puuttuu ominaisuus, jossa käyttäjä voi lisätä tietokohteeseen toissijaisia tietokohteita. -> Äänestäminen
+- Sovelluksesta puuttuu mahdollisuus äänestää, vaikka sen on ilmeisesti tarkoitus olla osa sovellusta. -> Lisätty. Oli aiemmin ei käyttäjäystävällisen linkin takana.
+- Tiedosto database.db on versionhallinnassa mukana, vaikka sen ei tulisi olla – jokaisen testaajan tulisi alustaa se itse. -> Poistettu
+- Dokumentaatiosta puuttuu maininta salaisesta avaimesta (SECRET_KEY), joka on pakollinen, jotta sovellus toimii. -> Lisätty
+- Tietokannan esitäyttö testidatalla ei toimi kunnolla: käyttäjillä ja tapahtumilla esiintyy UNIQUE constraint failed -virheitä. -> En saa virhettä. Toivottavasti toimii nyt!
+- Rekisteröintisivulta puuttuu linkki kirjautumissivulle. -> lisätty
+- Virheellisen syötteen tapauksessa lomake ei esitäytä annettuja tietoja uudelleen (pl. salasanat), mikä hankaloittaa korjaamista. -> esitäyttö lisätty
+- Painikkeet ja linkit eivät erotu muusta tekstistä, jolloin käyttäjän voi olla vaikea hahmottaa, mitä voi klikata. -> linkeistä tehty nappin näköisiä
+- Ilmoitukset näytetään punaisena, vaikka ne olisivat onnistuneita – tämä voi johtaa käyttäjää harhaan. -> korjattu
+- Käyttäjän lisäämiä rivinvaihtoja ei näytetä selaimessa. -> Mahdollisuus katsoa sisältöä rivinvaihtojen kanssa view nappia painamalla
+- Pitkät syötteet eivät katkea riveille, jolloin käyttöliittymä saattaa rikkoutua. -> Pituutta rajoitettu. 
+- Kaikilta sivuilta puuttuu takaisin-painike, jolla pääsisi edelliselle sivulle. -> Painikkeet lisätty
+
+
+
 
 # Commune App
 
